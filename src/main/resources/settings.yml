@@ -1,0 +1,142 @@
+# !-------------------------------------------------------------------------------------------------!
+#                       Welcome to the main configuration of ${project.artifactId}
+#                           Created by Reap_9 and SpiderDeluxe for Mystic Network
+# !-------------------------------------------------------------------------------------------------!
+# Replace the 0 with your license key
+license-key: 0
+# Do Not Edit This
+Version: 1
+#internal prefix
+Prefix: "&8[&5&lRKore&8]&7"
+Log_Lag_Over_Milis: 100
+#Debug Mode: Debug: true
+Debug: [ ]
+# Command Aliases
+Command_Aliases: [ rkore, rk ]
+# -------------------------------------------------------------------------------------------
+# Here you can set the main config of the plugin
+# -------------------------------------------------------------------------------------------
+prefix: "&8[&5&lRKore&8]&7"
+# -------------------------------------------------------------------------------------------
+# Here you can set the main config of the FlySpeedLimiter
+# -------------------------------------------------------------------------------------------
+fly-speed-limiter:
+  no-permission-message: "{prefix} &cYou are trying to go above the max fly speed set to this server, lower your fly boost."
+  bypass-permission: "rkore.flyspeedlimiter.bypass"
+  bypass-toggle:
+    description: "Toggles bypass mode on fly speed limiter"
+    message: "{prefix} You have toggled your fly speed bypass {toggle}"
+    toggle-error: "{prefix} &cError with toggling fly speed bypass mode"
+    no-permission: "{prefix} &cYou do not have permission to toggle fly speed"
+    permission: "rkore.flyspeedlimiter.toggle.bypass"
+    only-player: "{prefix} &cThis command can only be executed by a player"
+    on-placeholder: "&a&lOn"
+    off-placeholder: "&c&lOff"
+  max-horizontal: 2.5
+  max-vertical: 1.0
+  kick-message:
+    - "&8[&5&lRKore&8]"
+    - "&7You have been kicked for exceeding the fly speed limit"
+    - "&7Fly Boost is lowered on this server"
+
+# -------------------------------------------------------------------------------------------
+# Here you can set the main config of the SchemBuilder
+# -------------------------------------------------------------------------------------------
+schembuilder:
+  general:
+    permission: "rkore.schembuilder.admin"
+    # After how long a schematic item is deleted
+    schem-item-time: "12 hours"
+    schem-corner-particle: "NOTE"
+
+  # -------------------------------------------------------------------------------------------
+  # Here you can edit everything related to holograms
+  # -------------------------------------------------------------------------------------------
+  hologram:
+    has-sound: true
+    # Sound Volume Pitch
+    sound: BLOCK_BONE_BLOCK_STEP 1.0 1.0
+    #
+    # Placeholders
+    # {name} --> schematic name
+    # {time} --> time left
+    # {percentage} --> percentage of upload
+    hologram:
+      - "&5&l* &dSchematic Builder &5&l*"
+      - "&dSchematic:&f {name}"
+      - "&dTime:&f {time}"
+      - "&dPercentage:&f {percentage} Complete"
+  # -------------------------------------------------------------------------------------------
+  # Here you can edit the main messages/names of the plugin
+  # -------------------------------------------------------------------------------------------
+  messages:
+    schematic:
+      complete-placement: "{prefix} &cYou cannot place another structure, you must first complete the placement of this one."
+      over-lapping: "{prefix} &cSchematic overlapping into a claim you do not have permission in."
+      rotation-over-lapping: "{prefix} &cSchematic rotating into a claim you do not have permission in."
+    commands:
+      header-prefix: "&5&l"
+      give:
+        description: "Use this command to give schematic's place item"
+        # Placeholder
+        # {player} --> player name
+        no-player-found: "{prefix} I could not find any player with the name, &d{player}"
+        # Placeholder
+        # {name} --> schematic name
+        no-schematic-found: "{prefix} &cThere is no schematic called: {name}"
+        must-be-boolean: "{prefix} &cValue must be 'true' or 'false' to include air within the schematic."
+        # Placeholder
+        # {name} --> schematic name
+        successful: "{prefix} You have successfully activated the {name} schematic placement mode."
+  # -------------------------------------------------------------------------------------------
+  # Here you can edit the schematic item
+  # -------------------------------------------------------------------------------------------
+  schematic-item:
+    material: TNT
+    display-name: "&d&lSchematic Builder"
+    # Placeholders
+    # {name} --> schematic name
+    # {level} --> leve
+    lore:
+      - "&5&l* &dSchematic: &7{name}"
+      - "&5&l* &dLevel: &7{level}"
+      - "&5&l* &dTime: &7{time}"
+
+  # -------------------------------------------------------------------------------------------
+  # Here you can edit the schematic's menu button
+  # -------------------------------------------------------------------------------------------
+  schematic-gui:
+    title: "&5&lSchematic Builder"
+
+    accept-button:
+      material: GREEN_WOOL
+      title: "&aAccept Position"
+      # Placeholders
+      # {time} --> time to positioning the structure
+      # {rotation} --> rotation of positioning
+      # {name} --> name of schematic
+      # {level} --> level of schematic
+      lore:
+        - "Starts the build progress"
+
+    refuse-button:
+      material: RED_WOOl
+      title: "&cRefuse Position"
+      # Placeholders
+      # {time} --> time to positioning the structure
+      # {rotation} --> rotation of positioning
+      # {name} --> name of schematic
+      # {level} --> level of schematic
+      lore:
+        - "Deny's the location of the Schematic"
+
+    rotate-button:
+      material: Arrow
+      title: "&eRotate Position"
+      # Placeholders
+      # {time} --> time to positioning the structure
+      # {rotation} --> rotation of positioning
+      # {name} --> name of schematic
+      # {level} --> level of schematic
+      lore:
+        - "Rotates the schematic 90%"

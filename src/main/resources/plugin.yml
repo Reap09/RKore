@@ -1,0 +1,5 @@
+name: RKore
+version: ${project.version}
+main: ${main.class}
+api-version: 1.13
+depend: [ WorldEdit, Factions ]
