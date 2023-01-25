@@ -38,24 +38,24 @@ public final class RKore extends SimplePlugin {
 
 
         instance = this;
-        if (Settings.LICENSE_KEY == 0) {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cPlease enter a valid license key in settings.yml"));
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
-            setEnabled(false);
-            return;
-        }
+//        if (Settings.LICENSE_KEY == 0) {
+//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cPlease enter a valid license key in settings.yml"));
+//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+//            setEnabled(false);
+//            return;
+//        }
         console.sendMessage(ColorUtils.translateColorCodes("[&dRKore licensing&r] Current license key in config.yml:&d " + Settings.LICENSE_KEY));
 
         this.database = new Database();
 
         try {
-            this.database.initializeDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &4Could not initialize license database."));
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
-            setEnabled(false);
-            return;
+//            this.database.initializeDatabase();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &4Could not initialize license database."));
+//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+//            setEnabled(false);
+//            return;
 
         } catch (Error e) {
             console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
@@ -99,10 +99,18 @@ public final class RKore extends SimplePlugin {
             console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cNo package found of Settings"));
             console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
             setEnabled(false);
-        } else {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Settings"));
-        }
 
+        }
+        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Settings"));
+
+        if (Package.getPackage("org.mysticnetwork.rkore.runnable") == null) {
+            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cNo package found of Runnable"));
+            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+            setEnabled(false);
+
+        } else {
+            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Runnable"));
+        }
     }
 
     public void onReloadablesStart() {
