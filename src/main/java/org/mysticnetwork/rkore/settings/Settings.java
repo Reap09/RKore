@@ -1,7 +1,5 @@
 package org.mysticnetwork.rkore.settings;
 
-import com.comphenix.net.bytebuddy.asm.Advice;
-import org.bukkit.Server;
 import org.mysticnetwork.rkore.model.Schematic;
 import org.mysticnetwork.rkore.model.SchematicPasting;
 import org.bukkit.inventory.ItemStack;
@@ -16,7 +14,6 @@ import org.mineacademy.fo.settings.SimpleSettings;
 import org.mysticnetwork.rkore.utils.ColorUtils;
 
 import java.util.List;
-import java.util.Set;
 
 public class Settings extends SimpleSettings {
     protected int getConfigVersion() {
