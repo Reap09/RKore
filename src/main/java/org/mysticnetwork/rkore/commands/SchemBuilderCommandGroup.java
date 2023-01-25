@@ -19,8 +19,13 @@ public final class SchemBuilderCommandGroup extends SimpleCommandGroup {
 
     @Override
     protected void registerSubcommands() {
+        if (Settings.FlySpeedLimiter.ENABLED) {
+            registerSubcommand(new FlySpeedLimiterToggleBypass(this));
+        }
+        if (Settings.ClearLag.ENABLED) {
+            registerSubcommand(new ClearLag(this));
+        }
         registerSubcommand(new SchemCommandGive(this));
-        registerSubcommand(new FlySpeedLimiterToggleBypass(this));
         registerSubcommand(new ReloadCommand());
     }
 

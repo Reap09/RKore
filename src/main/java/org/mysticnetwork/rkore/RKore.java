@@ -2,6 +2,7 @@ package org.mysticnetwork.rkore;
 
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import net.luckperms.api.LuckPerms;
 
@@ -24,6 +25,7 @@ import org.mysticnetwork.rkore.model.Schematic;
 import org.mysticnetwork.rkore.model.SchematicItem;
 import org.mysticnetwork.rkore.model.SchematicPasting;
 import org.mysticnetwork.rkore.model.hologram.Hologram;
+import org.mysticnetwork.rkore.runnable.AutoClearLag;
 import org.mysticnetwork.rkore.settings.Settings;
 import org.mysticnetwork.rkore.utils.ColorUtils;
 
@@ -109,14 +111,22 @@ public final class RKore extends SimplePlugin {
         } else {
             console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Settings"));
         }
-        // Event Register
-        //getServer().getPluginManager().registerEvents(new FlySpeedLimiter(), this);
-        //getCommand("flyspeed").setExecutor(new FlySpeedLimiterToggleBypass(this));
 
     }
 
     public void onReloadablesStart() {
         instance = this;
+        if (Settings.ClearLag.AUTO_INTERVAL) {
+            if (Settings.ClearLag.INTERVAL_FORMAT.equalsIgnoreCase("seconds")) {
+                getInstance().getServer().getScheduler().runTaskTimer(instance, new AutoClearLag(), 0, 20*Settings.ClearLag.INTERVAL);
+            } else if (Settings.ClearLag.INTERVAL_FORMAT.equalsIgnoreCase("minutes")) {
+                getInstance().getServer().getScheduler().runTaskTimer(instance, new AutoClearLag(), 0, 1200*Settings.ClearLag.INTERVAL);
+            } else if (Settings.ClearLag.INTERVAL_FORMAT.equalsIgnoreCase("hours")) {
+                getInstance().getServer().getScheduler().runTaskTimer(instance, new AutoClearLag(), 0, 72000*Settings.ClearLag.INTERVAL);
+            } else {
+                console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cUnable to retrieve &einterval-format: '"+ Settings.ClearLag.INTERVAL_FORMAT+"' 7c from settings.yml"));
+            }
+        }
         registerEvents((Listener)new FlySpeedLimiter());
         registerEvents((Listener)new PlayerListener());
         registerEvents((Listener)new ChunkListener());
@@ -132,7 +142,7 @@ public final class RKore extends SimplePlugin {
     }
 
     public void onPluginStop() {
-        System.out.println("[RKore] Disabled");
+        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabled"));
     }
 
 }
