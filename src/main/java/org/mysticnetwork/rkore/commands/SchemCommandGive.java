@@ -15,6 +15,7 @@ public class SchemCommandGive extends SimpleSubCommand {
         super(parent, "give");
         setDescription(Settings.SchemBuilder.Messages.COMMAND_GIVE_DESCRIPTION);
         setPermission(Settings.SchemBuilder.General.SCHEMATIC_PERMISSION);
+        setPermissionMessage(Settings.SchemBuilder.Messages.COMMAND_NO_PERMISSION);
         setUsage("<player> <name> [with_air]");
         setMinArguments(2);
     }

@@ -2,20 +2,27 @@ package org.mysticnetwork.rkore;
 
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import net.luckperms.api.LuckPerms;
 
 import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.command.Command;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.mineacademy.fo.Common;
+import org.mineacademy.fo.command.DebugCommand;
+import org.mineacademy.fo.command.SimpleCommand;
 import org.mineacademy.fo.plugin.SimplePlugin;
 import org.mysticnetwork.rkore.cache.DataStorage;
+import org.mysticnetwork.rkore.commands.Discord;
 import org.mysticnetwork.rkore.commands.FlySpeedLimiterToggleBypass;
+import org.mysticnetwork.rkore.commands.Store;
+import org.mysticnetwork.rkore.commands.Website;
 import org.mysticnetwork.rkore.event.ChunkListener;
 import org.mysticnetwork.rkore.event.FlySpeedLimiter;
 import org.mysticnetwork.rkore.event.PlayerListener;
@@ -24,6 +31,7 @@ import org.mysticnetwork.rkore.model.Schematic;
 import org.mysticnetwork.rkore.model.SchematicItem;
 import org.mysticnetwork.rkore.model.SchematicPasting;
 import org.mysticnetwork.rkore.model.hologram.Hologram;
+import org.mysticnetwork.rkore.runnable.AutoClearLag;
 import org.mysticnetwork.rkore.settings.Settings;
 import org.mysticnetwork.rkore.utils.ColorUtils;
 
@@ -109,14 +117,31 @@ public final class RKore extends SimplePlugin {
         } else {
             console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Settings"));
         }
-        // Event Register
-        //getServer().getPluginManager().registerEvents(new FlySpeedLimiter(), this);
-        //getCommand("flyspeed").setExecutor(new FlySpeedLimiterToggleBypass(this));
 
     }
 
     public void onReloadablesStart() {
         instance = this;
+        if (Settings.ClearLag.AUTO_INTERVAL) {
+            if (Settings.ClearLag.INTERVAL_FORMAT.equalsIgnoreCase("seconds")) {
+                getInstance().getServer().getScheduler().runTaskTimer(instance, new AutoClearLag(), 0, 20*Settings.ClearLag.INTERVAL);
+            } else if (Settings.ClearLag.INTERVAL_FORMAT.equalsIgnoreCase("minutes")) {
+                getInstance().getServer().getScheduler().runTaskTimer(instance, new AutoClearLag(), 0, 1200*Settings.ClearLag.INTERVAL);
+            } else if (Settings.ClearLag.INTERVAL_FORMAT.equalsIgnoreCase("hours")) {
+                getInstance().getServer().getScheduler().runTaskTimer(instance, new AutoClearLag(), 0, 72000*Settings.ClearLag.INTERVAL);
+            } else {
+                console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cUnable to retrieve &einterval-format: '"+ Settings.ClearLag.INTERVAL_FORMAT+"' 7c from settings.yml"));
+            }
+        }
+        if (Settings.InfoCommands.DISCORD_ENABLED) {
+            registerCommand((Command)new Discord(getMainCommand()));
+        }
+        if (Settings.InfoCommands.WEBSITE_ENABLED) {
+            registerCommand((Command)new Website(getMainCommand()));
+        }
+        if (Settings.InfoCommands.STORE_ENABLED) {
+            registerCommand((Command)new Store(getMainCommand()));
+        }
         registerEvents((Listener)new FlySpeedLimiter());
         registerEvents((Listener)new PlayerListener());
         registerEvents((Listener)new ChunkListener());
@@ -132,7 +157,7 @@ public final class RKore extends SimplePlugin {
     }
 
     public void onPluginStop() {
-        System.out.println("[RKore] Disabled");
+        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabled"));
     }
 
 }

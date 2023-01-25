@@ -16,11 +16,15 @@ public final class SchemBuilderCommandGroup extends SimpleCommandGroup {
     @Getter(value = AccessLevel.PRIVATE)
     private static final SchemBuilderCommandGroup instance = new SchemBuilderCommandGroup();
 
-
     @Override
     protected void registerSubcommands() {
+        if (Settings.FlySpeedLimiter.ENABLED) {
+            registerSubcommand(new FlySpeedLimiterToggleBypass(this));
+        }
+        if (Settings.ClearLag.ENABLED) {
+            registerSubcommand(new ClearLag(this));
+        }
         registerSubcommand(new SchemCommandGive(this));
-        registerSubcommand(new FlySpeedLimiterToggleBypass(this));
         registerSubcommand(new ReloadCommand());
     }
 

@@ -21,7 +21,7 @@ public class FlySpeedLimiter implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
-            Player player = e.getPlayer();
+        Player player = e.getPlayer();
         UUID playerUUID = e.getPlayer().getUniqueId();
         User user = LuckPermsProvider.get().getUserManager().getUser(playerUUID);
         Tristate bypassPermission = user.getCachedData().getPermissionData().checkPermission(BYPASS_PERMISSION);

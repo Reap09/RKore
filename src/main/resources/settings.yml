@@ -18,9 +18,65 @@ Command_Aliases: [ rkore, rk ]
 # -------------------------------------------------------------------------------------------
 prefix: "&8[&5&lRKore&8]&7"
 # -------------------------------------------------------------------------------------------
+# Here you can set the main config of the Info Commands
+# -------------------------------------------------------------------------------------------
+discord:
+  enabled: true
+  permission: "rkore.info.discord"
+  message: "{prefix} &bhttps://discord.gg/mysticnetwork"
+  description: "Command to show the server's discord"
+  no-permission: "{prefix} &cYou do not have permission to this command"
+website:
+  enabled: true
+  permission: "rkore.info.website"
+  message: "{prefix} &ahttps://www.mysticnetwork.org"
+  description: "Command to show the server's website"
+  no-permission: "{prefix} &cYou do not have permission to this command"
+store:
+  enabled: true
+  permission: "rkore.info.store"
+  message: "{prefix} &ahttps://www.mysticnetwork.org"
+  description: "Command to show the server's store"
+  no-permission: "{prefix} &cYou do not have permission to this command"
+# -------------------------------------------------------------------------------------------
+# Here you can set the main config of the ClearLag
+# -------------------------------------------------------------------------------------------
+clear-lag:
+  enabled: true
+  description: "Clears entities in all words"
+  no-permission-message: "{prefix} &cYou do not have permission to Clear lag"
+  permission: "rkore.clearlag.clear"
+  # Placeholders
+  # {amount} --> amount of entities cleared
+  cleared-message: "{prefix} You have removed &d{amount} entities"
+  auto-interval: true
+  interval: 30
+  # Placeholders
+  # seconds
+  # minutes
+  # hours
+  interval-format: "seconds"
+  interval-messages:
+    - '{prefix} Entites clearing in &d30 &7seconds.'
+    - '{prefix} Entites clearing in &d15 &7seconds.'
+    - '{prefix} Entites clearing in &d5 &7seconds.'
+  message-timings:
+    - '30'
+    - '15'
+    - '5'
+  commands-on-clear:
+    - 'mob-stacking killall'
+  # Can use items and entities
+  # - DIAMOND_SWORD
+  # - SKELETON
+  allowed-entities:
+    - 'MOB_SPAWNER'
+    - 'SKELETON'
+# -------------------------------------------------------------------------------------------
 # Here you can set the main config of the FlySpeedLimiter
 # -------------------------------------------------------------------------------------------
 fly-speed-limiter:
+  enabled: true
   no-permission-message: "{prefix} &cYou are trying to go above the max fly speed set to this server, lower your fly boost."
   bypass-permission: "rkore.flyspeedlimiter.bypass"
   bypass-toggle:
@@ -56,7 +112,6 @@ schembuilder:
     has-sound: true
     # Sound Volume Pitch
     sound: BLOCK_BONE_BLOCK_STEP 1.0 1.0
-    #
     # Placeholders
     # {name} --> schematic name
     # {time} --> time left
@@ -66,6 +121,7 @@ schembuilder:
       - "&dSchematic:&f {name}"
       - "&dTime:&f {time}"
       - "&dPercentage:&f {percentage} Complete"
+
   # -------------------------------------------------------------------------------------------
   # Here you can edit the main messages/names of the plugin
   # -------------------------------------------------------------------------------------------
@@ -77,6 +133,7 @@ schembuilder:
     commands:
       header-prefix: "&5&l"
       give:
+        no-permission: "{prefix} &cYou do not have permission to give a schematic"
         description: "Use this command to give schematic's place item"
         # Placeholder
         # {player} --> player name
@@ -88,6 +145,7 @@ schembuilder:
         # Placeholder
         # {name} --> schematic name
         successful: "{prefix} You have successfully activated the {name} schematic placement mode."
+
   # -------------------------------------------------------------------------------------------
   # Here you can edit the schematic item
   # -------------------------------------------------------------------------------------------
@@ -101,13 +159,11 @@ schembuilder:
       - "&5&l* &dSchematic: &7{name}"
       - "&5&l* &dLevel: &7{level}"
       - "&5&l* &dTime: &7{time}"
-
   # -------------------------------------------------------------------------------------------
   # Here you can edit the schematic's menu button
   # -------------------------------------------------------------------------------------------
   schematic-gui:
     title: "&5&lSchematic Builder"
-
     accept-button:
       material: GREEN_WOOL
       title: "&aAccept Position"
@@ -118,7 +174,6 @@ schembuilder:
       # {level} --> level of schematic
       lore:
         - "Starts the build progress"
-
     refuse-button:
       material: RED_WOOl
       title: "&cRefuse Position"
@@ -129,7 +184,6 @@ schembuilder:
       # {level} --> level of schematic
       lore:
         - "Deny's the location of the Schematic"
-
     rotate-button:
       material: Arrow
       title: "&eRotate Position"
