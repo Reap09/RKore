@@ -1,15 +1,15 @@
 # !-------------------------------------------------------------------------------------------------!
 #                       Welcome to the main configuration of ${project.artifactId}
-#                           Created by Reap_9 and SpiderDeluxe for Mystic Network
+#                           Created by Reap_9 for Mystic Network
 # !-------------------------------------------------------------------------------------------------!
 # Replace the 0 with your license key
 license-key: 0
 # Do Not Edit This
 Version: 1
-#internal prefix
+# Internal prefix
 Prefix: "&8[&5&lRKore&8]&7"
 Log_Lag_Over_Milis: 100
-#Debug Mode: Debug: true
+# Debug Mode: Debug: true
 Debug: [ ]
 # Command Aliases
 Command_Aliases: [ rkore, rk ]
@@ -18,55 +18,135 @@ Command_Aliases: [ rkore, rk ]
 # -------------------------------------------------------------------------------------------
 prefix: "&8[&5&lRKore&8]&7"
 # -------------------------------------------------------------------------------------------
+# Here you can set the main config of the Command Spy
+# -------------------------------------------------------------------------------------------
+command-spy:
+  enabled: true
+  # Players with this will not send commands to command spy
+  bypass-permission: "rkore.cmdspy.bypass"
+  # Valid time zones can be found here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  timezone: "America/New_York"
+  # Valid time zone formats can be found here https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/text/SimpleDateFormat.html
+  timezone-format: "hh:mm:ss a"
+  in-game:
+    enabled: true
+    aliases:
+      - 'cmdspy'
+      - 'commandspy'
+    description: "Logs all commands to staff and discord"
+    permission: "rkore.cmdspy"
+    no-permission: "{prefix} &cYou do not have permission to use this command"
+    only-player: "{prefix} &cThis command can only be executed by a player"
+    toggle-message: "{prefix} You have toggled cmdspy {toggle}"
+    on-placeholder: "&a&lEnabled"
+    off-placeholder: "&c&lDisabled"
+    # Placeholders
+    # {player} --> player who executed the commands real name
+    # {lp-group} --> player's luckperms primary group
+    # {lp-prefix} --> player's luckperms primary prefix
+    # {cmd} --> the command the player executed
+    # {time} --> the time the player executed the command
+    message: "&8[&5&lCmdSpy&8] &8[&7{time}&8] [&7{lp-prefix}&8] &d{player}: &f{cmd}"
+    blacklisted-cmds:
+      - '/pin'
+  discord:
+    enabled: true
+    # Placeholders
+    # {player} --> player who executed the commands real name
+    # {lp-group} --> player's luckperms primary group
+    # {cmd} --> the command the player executed
+    # {server} --> shows what server it was executed on (this grabs from server.properties)
+    # {time} --> the time the player executed the command
+    # {r-time} --> relative discord time
+    # This will only show if the embed is set to false
+    webhook-url: "https://discord.com/api/webhooks/1068685688414933102/6QlgJOn8IB4owmxsnUfbxke8-x830P5ueNxMOaVPfN2RZk0VoXK29goltE6kQdVXP1i1"
+    webhook-avatar: "https://media.discordapp.net/attachments/844887875790045204/994253196644069386/Mystic_network-01.jpg?width=676&height=676"
+    webhook-username: "RKore CmdSpy"
+    message: "[{time}] [**{lp-group}**] **{player}**: {cmd}"
+    embed:
+      enabled: false
+      title: "**Command Spy**"
+      color: "#8f6be4"
+      thumbnail: "https://media.discordapp.net/attachments/844887875790045204/994253196644069386/Mystic_network-01.jpg?width=676&height=676"
+      # {time} does not show in footers
+      footer: "{server} | {player}"
+      messages:
+        - '**Player:**'
+        - '``{player}``'
+        - ''
+        - '**Command:**'
+        - '``{cmd}``'
+        - ''
+        - '**Server:**'
+        - '``{server}``'
+        - ''
+        - '{r-time}'
+# -------------------------------------------------------------------------------------------
 # Here you can set the main config of the Info Commands
 # -------------------------------------------------------------------------------------------
-discord:
+info-commands:
   enabled: true
-  permission: "rkore.info.discord"
-  message: "{prefix} &bhttps://discord.gg/mysticnetwork"
-  description: "Command to show the server's discord"
-  no-permission: "{prefix} &cYou do not have permission to this command"
-website:
-  enabled: true
-  permission: "rkore.info.website"
-  message: "{prefix} &ahttps://www.mysticnetwork.org"
-  description: "Command to show the server's website"
-  no-permission: "{prefix} &cYou do not have permission to this command"
-store:
-  enabled: true
-  permission: "rkore.info.store"
-  message: "{prefix} &ahttps://www.mysticnetwork.org"
-  description: "Command to show the server's store"
-  no-permission: "{prefix} &cYou do not have permission to this command"
+  discord:
+    enabled: true
+    aliases:
+      - 'disc'
+    permission: "rkore.info.discord"
+    message: "{prefix} &bhttps://discord.gg/mysticnetwork"
+    description: "Command to show the server's discord"
+    no-permission: "{prefix} &cYou do not have permission to use this command"
+  website:
+    enabled: true
+    aliases:
+      - 'web'
+    permission: "rkore.info.website"
+    message: "{prefix} &ahttps://www.mysticnetwork.org"
+    description: "Command to show the server's website"
+    no-permission: "{prefix} &cYou do not have permission to use this command"
+  store:
+    enabled: true
+    aliases:
+      - 'stores'
+    permission: "rkore.info.store"
+    message: "{prefix} &ahttps://www.mysticnetwork.org"
+    description: "Command to show the server's store"
+    no-permission: "{prefix} &cYou do not have permission to use this command"
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of the ClearLag
 # -------------------------------------------------------------------------------------------
 clear-lag:
   enabled: true
+  aliases:
+    - 'cl'
   description: "Clears entities in all words"
   no-permission-message: "{prefix} &cYou do not have permission to Clear lag"
   permission: "rkore.clearlag.clear"
-  # Placeholders
-  # {amount} --> amount of entities cleared
-  cleared-message: "{prefix} You have removed &d{amount} entities"
+  only-player: "{prefix} &cThis command can only be executed by a player"
   auto-interval: true
   interval: 30
   # Placeholders
   # seconds
   # minutes
   # hours
-  interval-format: "seconds"
+  interval-format: "minutes"
+  # This will always remain in seconds
   interval-messages:
-    - '{prefix} Entites clearing in &d30 &7seconds.'
-    - '{prefix} Entites clearing in &d15 &7seconds.'
-    - '{prefix} Entites clearing in &d5 &7seconds.'
-  message-timings:
-    - '30'
-    - '15'
-    - '5'
+    - '1800:{prefix} Next entity clear in &d30 &7minutes'
+    - '900:{prefix} Entities clearing in &d15 &7minutes'
+    - '300:{prefix} Entities clearing in &d5 &7minutes'
+    - '60:{prefix} Entities clearing in &d1 &7minute'
+    - '30:{prefix} Entities clearing in &d30 &7seconds'
+    - '15:{prefix} Entities clearing in &d15 &7seconds'
+    - '5:{prefix} Entities clearing in &d5 &7seconds'
+    - '4:{prefix} Entities clearing in &d4 &7seconds'
+    - '3:{prefix} Entities clearing in &d3 &7seconds'
+    - '2:{prefix} Entities clearing in &d2 &7seconds'
+    - '1:{prefix} Entities clearing in &d1 &7seconds'
+  # Placeholders
+  # {amount} --> amount of entities cleared
+  cleared-message: "{prefix} &d{amount} &7Entities were removed"
   commands-on-clear:
     - 'mob-stacking killall'
-  # Can use items and entities
+  # You can use items and entities
   # - DIAMOND_SWORD
   # - SKELETON
   allowed-entities:
@@ -77,37 +157,40 @@ clear-lag:
 # -------------------------------------------------------------------------------------------
 fly-speed-limiter:
   enabled: true
+  aliases:
+    - 'flyboostlimiter'
+    - 'fbl'
+    - 'fsl'
   no-permission-message: "{prefix} &cYou are trying to go above the max fly speed set to this server, lower your fly boost."
   bypass-permission: "rkore.flyspeedlimiter.bypass"
-  bypass-toggle:
-    description: "Toggles bypass mode on fly speed limiter"
-    message: "{prefix} You have toggled your fly speed bypass {toggle}"
-    toggle-error: "{prefix} &cError with toggling fly speed bypass mode"
-    no-permission: "{prefix} &cYou do not have permission to toggle fly speed"
-    permission: "rkore.flyspeedlimiter.toggle.bypass"
-    only-player: "{prefix} &cThis command can only be executed by a player"
-    on-placeholder: "&a&lOn"
-    off-placeholder: "&c&lOff"
   max-horizontal: 2.5
   max-vertical: 1.0
+  kick-enabled: false
   kick-message:
     - "&8[&5&lRKore&8]"
     - "&7You have been kicked for exceeding the fly speed limit"
     - "&7Fly Boost is lowered on this server"
+  bypass-toggle:
+    enabled: true
+    description: "Toggles bypass mode on fly speed limiter"
+    no-permission: "{prefix} &cYou do not have permission to toggle fly speed"
+    permission: "rkore.flyspeedlimiter.toggle.bypass"
+    message: "{prefix} You have toggled your fly speed bypass {toggle}"
+    toggle-error: "{prefix} &cError with toggling fly speed bypass mode"
+    only-player: "{prefix} &cThis command can only be executed by a player"
+    on-placeholder: "&a&lOn"
+    off-placeholder: "&c&lOff"
 
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of the SchemBuilder
 # -------------------------------------------------------------------------------------------
 schembuilder:
+  enabled: true
   general:
     permission: "rkore.schembuilder.admin"
     # After how long a schematic item is deleted
     schem-item-time: "12 hours"
     schem-corner-particle: "NOTE"
-
-  # -------------------------------------------------------------------------------------------
-  # Here you can edit everything related to holograms
-  # -------------------------------------------------------------------------------------------
   hologram:
     has-sound: true
     # Sound Volume Pitch
@@ -121,10 +204,6 @@ schembuilder:
       - "&dSchematic:&f {name}"
       - "&dTime:&f {time}"
       - "&dPercentage:&f {percentage} Complete"
-
-  # -------------------------------------------------------------------------------------------
-  # Here you can edit the main messages/names of the plugin
-  # -------------------------------------------------------------------------------------------
   messages:
     schematic:
       complete-placement: "{prefix} &cYou cannot place another structure, you must first complete the placement of this one."
@@ -145,10 +224,6 @@ schembuilder:
         # Placeholder
         # {name} --> schematic name
         successful: "{prefix} You have successfully activated the {name} schematic placement mode."
-
-  # -------------------------------------------------------------------------------------------
-  # Here you can edit the schematic item
-  # -------------------------------------------------------------------------------------------
   schematic-item:
     material: TNT
     display-name: "&d&lSchematic Builder"
@@ -159,9 +234,7 @@ schembuilder:
       - "&5&l* &dSchematic: &7{name}"
       - "&5&l* &dLevel: &7{level}"
       - "&5&l* &dTime: &7{time}"
-  # -------------------------------------------------------------------------------------------
-  # Here you can edit the schematic's menu button
-  # -------------------------------------------------------------------------------------------
+      -
   schematic-gui:
     title: "&5&lSchematic Builder"
     accept-button:

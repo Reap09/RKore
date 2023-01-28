@@ -16,6 +16,8 @@ import org.mysticnetwork.rkore.utils.ColorUtils;
 import java.util.List;
 
 public class Settings extends SimpleSettings {
+
+
     protected int getConfigVersion() {
         return 1;
     }
@@ -28,37 +30,130 @@ public class Settings extends SimpleSettings {
         LICENSE_KEY = Settings.getInteger("license-key");
     }
 
+    public static class CommandSpy {
+        public static Boolean ENABLED;
+        public static String BYPASS_PERMISSION;
+        public static String TIMEZONE;
+        public static String TIMEZONE_FORMAT;
+
+        private static void init() {
+            Settings.setPathPrefix("command-spy");
+            ENABLED = Settings.getBoolean("enabled");
+            BYPASS_PERMISSION = Settings.getString("bypass-permission");
+            TIMEZONE = Settings.getString("timezone");
+            TIMEZONE_FORMAT = Settings.getString("timezone-format");
+        }
+
+        public static class InGame {
+            public static Boolean ENABLED;
+            public static List<String> ALIASES;
+            public static String DESCRIPTION;
+            public static String PERMISSION;
+            public static String NO_PERMISSION;
+            public static String ONLY_PLAYER;
+            public static String TOGGLE_MESSAGE;
+            public static String ON_PLACEHOLDER;
+            public static String OFF_PLACEHOLDER;
+            public static String MESSAGE;
+            public static List<String> BLACKLISTED_CMDS;
+
+            private static void init() {
+                Settings.setPathPrefix("command-spy.in-game");
+                ENABLED = Settings.getBoolean("enabled");
+                ALIASES = Settings.getStringList("aliases");
+                DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
+                PERMISSION = ColorUtils.translateColorCodes(Settings.getString("permission"));
+                NO_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("no-permission"));
+                ONLY_PLAYER = ColorUtils.translateColorCodes(Settings.getString("only-player"));
+                TOGGLE_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("toggle-message"));
+                ON_PLACEHOLDER = ColorUtils.translateColorCodes(Settings.getString("on-placeholder"));
+                OFF_PLACEHOLDER = ColorUtils.translateColorCodes(Settings.getString("off-placeholder"));
+                MESSAGE = ColorUtils.translateColorCodes(Settings.getString("message"));
+                BLACKLISTED_CMDS = Settings.getStringList("blacklisted-cmds");
+            }
+        }
+
+        public static class Discord {
+            public static Boolean ENABLED;
+            public static String WEBHOOK_URL;
+            public static String WEBHOOK_AVATAR;
+            public static String WEBHOOK_USERNAME;
+            public static String MESSAGE;
+
+            private static void init() {
+                Settings.setPathPrefix("command-spy.discord");
+                ENABLED = Settings.getBoolean("enabled");
+                WEBHOOK_URL = Settings.getString("webhook-url");
+                WEBHOOK_AVATAR = Settings.getString("webhook-avatar");
+                WEBHOOK_USERNAME = Settings.getString("webhook-username");
+                MESSAGE = Settings.getString("message");
+            }
+
+            public static class Embed {
+                public static Boolean ENABLED;
+                public static String TITLE;
+                public static String COLOR;
+                public static String THUMBNAIL;
+                public static String FOOTER;
+                public static List<String> MESSAGES;
+
+                private static void init() {
+                    Settings.setPathPrefix("command-spy.discord.embed");
+                    ENABLED = Settings.getBoolean("enabled");
+                    TITLE = Settings.getString("title");
+                    COLOR = Settings.getString("color");
+                    THUMBNAIL = Settings.getString("thumbnail");
+                    FOOTER = Settings.getString("footer");
+                    MESSAGES = Settings.getStringList("messages");
+                }
+            }
+        }
+    }
+
     public static class InfoCommands {
+        public static Boolean ENABLED;
+
         public static Boolean DISCORD_ENABLED;
+        public static List<String> DISCORD_ALIASES;
         public static String DISCORD_PERMISSION;
         public static String DISCORD_MESSAGE;
         public static String DISCORD_DESCRIPTION;
         public static String DISCORD_NO_PERMISSION;
+
         public static Boolean WEBSITE_ENABLED;
+        public static List<String> WEBSITE_ALIASES;
         public static String WEBSITE_PERMISSION;
         public static String WEBSITE_MESSAGE;
         public static String WEBSITE_DESCRIPTION;
         public static String WEBSITE_NO_PERMISSION;
+
         public static Boolean STORE_ENABLED;
+        public static List<String> STORE_ALIASES;
         public static String STORE_PERMISSION;
         public static String STORE_MESSAGE;
         public static String STORE_DESCRIPTION;
         public static String STORE_NO_PERMISSION;
+
         private static void init() {
-            Settings.setPathPrefix("discord");
+            Settings.setPathPrefix("info-commands");
+            ENABLED = Settings.getBoolean("enabled");
+            Settings.setPathPrefix("info-commands.discord");
             DISCORD_ENABLED = Settings.getBoolean("enabled");
+            DISCORD_ALIASES = Settings.getStringList("aliases");
             DISCORD_PERMISSION = Settings.getString("permission");
             DISCORD_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("message"));
             DISCORD_DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
             DISCORD_NO_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("no-permission"));
-            Settings.setPathPrefix("website");
+            Settings.setPathPrefix("info-commands.website");
             WEBSITE_ENABLED = Settings.getBoolean("enabled");
+            WEBSITE_ALIASES = Settings.getStringList("aliases");
             WEBSITE_PERMISSION = Settings.getString("permission");
             WEBSITE_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("message"));
             WEBSITE_DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
             WEBSITE_NO_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("no-permission"));
-            Settings.setPathPrefix("store");
+            Settings.setPathPrefix("info-commands.store");
             STORE_ENABLED = Settings.getBoolean("enabled");
+            STORE_ALIASES = Settings.getStringList("aliases");
             STORE_PERMISSION = Settings.getString("permission");
             STORE_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("message"));
             STORE_DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
@@ -69,30 +164,33 @@ public class Settings extends SimpleSettings {
     public static class ClearLag {
 
         public static Boolean ENABLED;
+        public static List<String> ALIASES;
         public static String DESCRIPTION;
         public static String NO_PERMISSION_MESSAGE;
         public static String PERMISSION;
+        public static String ONLY_PLAYER;
         public static String CLEARED_MESSAGE;
+
         public static Boolean AUTO_INTERVAL;
         public static Integer INTERVAL;
         public static String INTERVAL_FORMAT;
         public static List<String> INTERVAL_MESSAGES;
-        public static List<String> MESSAGE_TIMINGS;
         public static List<String> COMMANDS_ON_CLEAR;
         public static List<String> ALLOWED_ENTITIES;
 
         private static void init() {
             Settings.setPathPrefix("clear-lag");
             ENABLED = Settings.getBoolean("enabled");
+            ALIASES = Settings.getStringList("aliases");
             DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
             NO_PERMISSION_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("no-permission-message"));
             PERMISSION = Settings.getString("permission");
+            ONLY_PLAYER = ColorUtils.translateColorCodes(Settings.getString("only-player"));
             CLEARED_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("cleared-message"));
             AUTO_INTERVAL = Settings.getBoolean("auto-interval");
             INTERVAL = Settings.getInteger("interval");
             INTERVAL_FORMAT = Settings.getString("interval-format");
             INTERVAL_MESSAGES = Settings.getStringList("interval-messages");
-            MESSAGE_TIMINGS = Settings.getStringList("message-timings");
             COMMANDS_ON_CLEAR = Settings.getStringList("commands-on-clear");
             ALLOWED_ENTITIES = Settings.getStringList("allowed-entities");
         }
@@ -101,9 +199,13 @@ public class Settings extends SimpleSettings {
     public static class FlySpeedLimiter {
 
         public static Boolean ENABLED;
+        public static List<String> ALIASES;
         public static String NO_PERMISSION_MESSAGE;
         public static String BYPASS_PERMISSION;
         public static Double MAX_HORIZONTAL_FLY_SPEED;
+        public static Double MAX_VERTICAL_FLY_SPEED;
+
+        public static Boolean BYPASS_TOGGLE_ENABLED;
         public static String BYPASS_TOGGLE_DESCRIPTION;
         public static String BYPASS_TOGGLE_PERMISSION;
         public static String BYPASS_TOGGLE_NO_PERMISSION;
@@ -112,17 +214,21 @@ public class Settings extends SimpleSettings {
         public static String BYPASS_TOGGLE_ERROR;
         public static String BYPASS_TOGGLE_ON;
         public static String BYPASS_TOGGLE_OFF;
+        public static Boolean KICK_ENABLED;
         public static List<String> KICK_MESSAGE;
 
         private static void init() {
             Settings.setPathPrefix("fly-speed-limiter");
             ENABLED = Settings.getBoolean("enabled");
+            ALIASES = Settings.getStringList("aliases");
             NO_PERMISSION_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("no-permission-message"));
             BYPASS_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("bypass-permission"));
             MAX_HORIZONTAL_FLY_SPEED = Settings.getDouble("max-horizontal");
-            //MAX_VERTICAL_FLY_SPEED = Settings.getDouble("max-vertical");
+            MAX_VERTICAL_FLY_SPEED = Settings.getDouble("max-vertical");
+            KICK_ENABLED = Settings.getBoolean("kick-enabled");
             KICK_MESSAGE = Settings.getStringList("kick-message");
             Settings.setPathPrefix("fly-speed-limiter.bypass-toggle");
+            BYPASS_TOGGLE_ENABLED = Settings.getBoolean("enabled");
             BYPASS_TOGGLE_DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
             BYPASS_TOGGLE_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("message"));
             BYPASS_TOGGLE_ERROR = ColorUtils.translateColorCodes(Settings.getString("toggle-error"));
@@ -135,6 +241,14 @@ public class Settings extends SimpleSettings {
     }
 
     public static class SchemBuilder {
+
+        public static Boolean ENABLED;
+
+        private static void init() {
+            Settings.setPathPrefix("schembuilder");
+            ENABLED = Settings.getBoolean("enabled");
+        }
+
         public static class General {
             public static String SCHEMATIC_PERMISSION;
             public static SimpleTime SCHEMATIC_ITEM_TIME;
