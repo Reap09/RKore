@@ -27,7 +27,9 @@ public class SchemCommandGive extends SimpleSubCommand {
         Player stringPlayer = Bukkit.getPlayer(argPlayer);
 
         if (stringPlayer == null) {
-            player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_NO_PLAYER_FOUND).replace("{player}", this.args[0]).replace("{prefix}", Settings.PREFIX));
+            player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_NO_PLAYER_FOUND)
+                    .replace("{player}", this.args[0])
+                    .replace("{prefix}", Settings.PREFIX));
 
         } else {
 
@@ -35,7 +37,9 @@ public class SchemCommandGive extends SimpleSubCommand {
             Schematic schematic = Schematic.findSchematic(param);
             try{
             if (schematic == null) {
-                player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_NO_SCHEMATIC_FOUND.replace("{name}", param).replace("{prefix}", Settings.PREFIX)));
+                player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_NO_SCHEMATIC_FOUND
+                        .replace("{name}", param)
+                        .replace("{prefix}", Settings.PREFIX)));
                 return;
             }
             } catch (NullPointerException e) {
@@ -44,13 +48,16 @@ public class SchemCommandGive extends SimpleSubCommand {
             boolean withAir = true;
             if (this.args.length > 2) {
                 if (!(Objects.equals(this.args[2], "true") || Objects.equals(this.args[2], "false"))) {
-                    player.sendMessage((Settings.SchemBuilder.Messages.MUST_BE_BOOLEAN).replace("{prefix}", Settings.PREFIX));
+                    player.sendMessage((Settings.SchemBuilder.Messages.MUST_BE_BOOLEAN)
+                            .replace("{prefix}", Settings.PREFIX));
                     return;
                 }
                 withAir = Boolean.parseBoolean(this.args[2]);
             }
             schematic.giveItem(player, withAir);
-            player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_SUCCESSFUL.replace("{name}", schematic.getName()).replace("{prefix}", Settings.PREFIX)));
+            player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_SUCCESSFUL
+                    .replace("{name}", schematic.getName())
+                    .replace("{prefix}", Settings.PREFIX)));
         }
     }
 
