@@ -21,12 +21,13 @@ public class ClearLag extends SimpleSubCommand {
         super(parent, "clearlag");
         setDescription(Settings.FlySpeedLimiter.BYPASS_TOGGLE_DESCRIPTION);
         setPermission(Settings.ClearLag.PERMISSION);
+        setPermissionMessage(Settings.ClearLag.NO_PERMISSION_MESSAGE);
+        setAliases(Settings.ClearLag.ALIASES);
         setMinArguments(0);
     }
     private int removedEntities = 0;
 
     protected void onCommand() {
-        Player player = (Player) sender;
         removedEntities = 0;
         List<String> commandList = Settings.ClearLag.COMMANDS_ON_CLEAR;
         for (World world : Bukkit.getServer().getWorlds()) {
@@ -50,8 +51,14 @@ public class ClearLag extends SimpleSubCommand {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), commandString);
 
         }
-        String totalRemovedEntities = String.valueOf((Integer) removedEntities);
-        player.sendMessage(Settings.ClearLag.CLEARED_MESSAGE.replace("{prefix}", Settings.PREFIX).replace("{amount}", totalRemovedEntities));
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            String totalRemovedEntities = String.valueOf((Integer) removedEntities);
+            player.sendMessage(Settings.ClearLag.CLEARED_MESSAGE.replace("{prefix}", Settings.PREFIX).replace("{amount}", totalRemovedEntities));
+        } else {
+            String totalRemovedEntities = String.valueOf((Integer) removedEntities);
+            sender.sendMessage(Settings.ClearLag.CLEARED_MESSAGE.replace("{prefix}", Settings.PREFIX).replace("{amount}", totalRemovedEntities));
+        }
     }
 }
 
