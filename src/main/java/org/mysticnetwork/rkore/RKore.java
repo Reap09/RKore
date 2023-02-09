@@ -1,6 +1,6 @@
 package org.mysticnetwork.rkore;
 
-import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 
 import org.bukkit.Server;
@@ -10,11 +10,8 @@ import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
 import org.mysticnetwork.rkore.cache.DataStorage;
 import org.mysticnetwork.rkore.commands.*;
-import org.mysticnetwork.rkore.event.ChunkListener;
-import org.mysticnetwork.rkore.event.CommandSpy;
-import org.mysticnetwork.rkore.event.FlySpeedLimiter;
-import org.mysticnetwork.rkore.event.PlayerListener;
-import org.mysticnetwork.rkore.licensedb.Database;
+import org.mysticnetwork.rkore.event.*;
+import org.mysticnetwork.rkore.licensedb.Licensing;
 import org.mysticnetwork.rkore.model.Schematic;
 import org.mysticnetwork.rkore.model.SchematicItem;
 import org.mysticnetwork.rkore.model.SchematicPasting;
@@ -23,10 +20,11 @@ import org.mysticnetwork.rkore.runnable.AutoClearLag;
 import org.mysticnetwork.rkore.settings.Settings;
 import org.mysticnetwork.rkore.utils.ColorUtils;
 
+import static org.mysticnetwork.rkore.model.Schematic.getSchematics;
+
 public final class RKore extends SimplePlugin {
-    public static String WEBHOOK_URL = "https://discord.com/api/webhooks/1068685688414933102/6QlgJOn8IB4owmxsnUfbxke8-x830P5ueNxMOaVPfN2RZk0VoXK29goltE6kQdVXP1i1";
     public static RKore instance;
-    public Database database;
+
 
     public static RKore getInstance() {
         return instance;
@@ -41,100 +39,118 @@ public final class RKore extends SimplePlugin {
         return spyingPlayers;
     }
 
+    private Map<UUID, Timestamp> confirmations = new HashMap<>();
+    public Map<UUID, Timestamp> getConfirmations() {
+        return confirmations;
+    }
+    private Licensing.LogType logType = Licensing.LogType.NORMAL;
+    public RKore setConsoleLog(Licensing.LogType logType) {
+        this.logType = logType;
+        return this;
+    }
+
+
     public void onPluginStart() {
-
-
         instance = this;
-//        if (Settings.LICENSE_KEY == 0) {
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cPlease enter a valid license key in settings.yml"));
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
-//            setEnabled(false);
-//            return;
-//        }
-        console.sendMessage(ColorUtils.translateColorCodes("[&dRKore licensing&r] Current license key in config.yml:&d " + Settings.LICENSE_KEY));
-
-        this.database = new Database();
 
         try {
-//            this.database.initializeDatabase();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &4Could not initialize license database."));
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
-//            setEnabled(false);
-//            return;
-
+            if(!new Licensing(Settings.LICENSE_KEY, "https://androecia.com/rkore-license/verify.php", this).setSecurityKey("YecoF0I6M05thxLeokoHuW8iUhTdIUInjkfF").register()) return;
         } catch (Error e) {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+            log(1,"[&5RKore&r] &cDisabling Plugin.");
             setEnabled(false);
             return;
         }
+
+        log(1,"[&5RKore&r] Schematics Loaded: &5" + getSchematics().size());
 
         if (Package.getPackage("org.mysticnetwork.rkore.cache") == null) {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cNo package found of Cache"));
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+            log(1,"[&5RKore&r] &cNo package found of Cache");
+            log(1,"[&5RKore&r] &cDisabling Plugin.");
             setEnabled(false);
             return;
         }
-        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Cache"));
+        log(1,"[&5RKore&r] &aSuccessfully loaded Cache");
 
         if (Package.getPackage("org.mysticnetwork.rkore.commands") == null) {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cNo package found of Commands"));
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+            log(1,"[&5RKore&r] &cNo package found of Commands");
+            log(1,"[&5RKore&r] &cDisabling Plugin.");
             setEnabled(false);
             return;
         }
-        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Commands"));
+        log(1,"[&5RKore&r] &aSuccessfully loaded Commands");
 
         if (Package.getPackage("org.mysticnetwork.rkore.event") == null) {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cNo package found of Event"));
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+            log(1,"[&5RKore&r] &cNo package found of Event");
+            log(1,"[&5RKore&r] &cDisabling Plugin.");
             setEnabled(false);
             return;
         }
-        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Events"));
+        log(1,"[&5RKore&r] &aSuccessfully loaded Events");
 
         if (Package.getPackage("org.mysticnetwork.rkore.model") == null) {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cNo package found of Model"));
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+            log(1,"[&5RKore&r] &cNo package found of Model");
+            log(1,"[&5RKore&r] &cDisabling Plugin.");
             setEnabled(false);
             return;
         }
-        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Models"));
+        log(1,"[&5RKore&r] &aSuccessfully loaded Models");
 
         if (Package.getPackage("org.mysticnetwork.rkore.settings") == null) {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cNo package found of Settings"));
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+            log(1,"[&5RKore&r] &cNo package found of Settings");
+            log(1,"[&5RKore&r] &cDisabling Plugin.");
             setEnabled(false);
             return;
         }
-        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Settings"));
+        log(1,"[&5RKore&r] &aSuccessfully loaded Settings");
 
         if (Package.getPackage("org.mysticnetwork.rkore.runnable") == null) {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cNo package found of Runnable"));
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabling Plugin."));
+            log(1,"[&5RKore&r] &cNo package found of Runnable");
+            log(1,"[&5RKore&r] &cDisabling Plugin.");
             setEnabled(false);
         } else {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSuccessfully loaded Runnable"));
-        }
-        if (Settings.CommandSpy.ENABLED) {
-            registerEvents(new CommandSpy());
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aCommand Spy Enabled"));
-        } else {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cCommand Spy Disabled"));
+            log(1,"[&5RKore&r] &aSuccessfully loaded Runnable");
         }
 
+
+        // Event Registration
+
+        if (Settings.SchemBuilder.ENABLED) {
+            registerEvents(new PlayerListener());
+            registerEvents(new ChunkListener());
+            log(1,"[&5RKore&r] &aSchem Builder Enabled");
+        } else {
+            log(1,"[&5RKore&r] &aSchem Builder Disabled");
+        }
+
+        if (Settings.FlySpeedLimiter.ENABLED) {
+            registerEvents(new FlySpeedLimiter());
+            log(1,"[&5RKore&r] &aFly Speed Limiter Enabled");
+        } else {
+            log(1,"[&5RKore&r] &cFly Speed Limiter Disabled");
+        }
+
+        if (Settings.CommandSpy.ENABLED) {
+            registerEvents(new CommandSpy());
+            log(1,"[&5RKore&r] &aCommand Spy Enabled");
+        } else {
+            log(1,"[&5RKore&r] &cCommand Spy Disabled");
+        }
+
+
+        // Runnable Registration
         if (Settings.ClearLag.ENABLED) {
             if (Settings.ClearLag.AUTO_INTERVAL) {
                 getInstance().getServer().getScheduler().runTaskTimer(instance, new AutoClearLag(), 20 * 5, 20);
-                console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aClear Lag Auto Interval Enabled"));
+                log(1,"[&5RKore&r] &aClear Lag Auto Interval Enabled");
             } else {
-                console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cClear Lag Auto Interval Disabled"));
+                log(1,"[&5RKore&r] &cClear Lag Auto Interval Disabled");
             }
         } else {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cClear Lag Disabled"));
+            log(1,"[&5RKore&r] &cClear Lag Disabled");
         }
 
+
+        // Command Registration
         if (Settings.CommandSpy.InGame.ENABLED) {
             registerCommand(new CmdSpy(getMainCommand()));
         }
@@ -150,23 +166,26 @@ public final class RKore extends SimplePlugin {
                 registerCommand(new Store(getMainCommand()));
             }
         } else {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cInfo Commands Disabled"));
+            log(1,"[&5RKore&r] &cInfo Commands Disabled");
         }
 
+        if (Settings.ClearInventory.ENABLED) {
+            registerCommand(new ClearInventory(getMainCommand()));
+        } else {
+            log(1,"[&5RKore&r] &cClear Inventory Disabled");
+        }
 
         if (Settings.FlySpeedLimiter.ENABLED) {
-            registerEvents(new FlySpeedLimiter());
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aFly Speed Limiter Enabled"));
+            registerCommand(new FlySpeedLimiterToggleBypass(getMainCommand()));
         } else {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cFly Speed Limiter Disabled"));
+            log(1,"[&5RKore&r] &cFly Speed Limiter Toggle Disabled");
         }
 
-        if (Settings.SchemBuilder.ENABLED) {
-            registerEvents(new PlayerListener());
-            registerEvents(new ChunkListener());
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSchem Builder Enabled"));
+
+        if (Settings.ClearLag.ENABLED) {
+            registerCommand(new ClearLag(getMainCommand()));
         } else {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSchem Builder Disabled"));
+            log(1,"[&5RKore&r] &cClear lag Command Disabled");
         }
     }
 
@@ -174,61 +193,6 @@ public final class RKore extends SimplePlugin {
 
         instance = this;
 
-
-        //registerCommand(new ClearInventory(getMainCommand()));
-
-
-//        if (Settings.CommandSpy.ENABLED) {
-//            registerEvents(new CommandSpy());
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aCommand Spy Enabled"));
-//        } else {
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cCommand Spy Disabled"));
-//        }
-//
-//        if (Settings.ClearLag.ENABLED) {
-//            if (Settings.ClearLag.AUTO_INTERVAL) {
-//                getInstance().getServer().getScheduler().runTaskTimer(instance, new AutoClearLag(), 20 * 5, 20);
-//                console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aClear Lag Auto Interval Enabled"));
-//            } else {
-//                console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cClear Lag Auto Interval Disabled"));
-//            }
-//        } else {
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cClear Lag Disabled"));
-//        }
-//
-//        if (Settings.CommandSpy.InGame.ENABLED) {
-//            registerCommand(new CmdSpy(getMainCommand()));
-//        }
-//
-//        if (Settings.InfoCommands.ENABLED) {
-//            if (Settings.InfoCommands.DISCORD_ENABLED) {
-//                registerCommand(new Discord(getMainCommand()));
-//            }
-//            if (Settings.InfoCommands.WEBSITE_ENABLED) {
-//                registerCommand(new Website(getMainCommand()));
-//            }
-//            if (Settings.InfoCommands.STORE_ENABLED) {
-//                registerCommand(new Store(getMainCommand()));
-//            }
-//        } else {
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cInfo Commands Disabled"));
-//        }
-//
-//
-//        if (Settings.FlySpeedLimiter.ENABLED) {
-//            registerEvents(new FlySpeedLimiter());
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aFly Speed Limiter Enabled"));
-//        } else {
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cFly Speed Limiter Disabled"));
-//        }
-//
-//        if (Settings.SchemBuilder.ENABLED) {
-//            registerEvents(new PlayerListener());
-//            registerEvents(new ChunkListener());
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSchem Builder Enabled"));
-//        } else {
-//            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aSchem Builder Disabled"));
-//        }
         Schematic.loadAll();
         DataStorage.getInstance().load();
         Common.runTimer(20, () -> {
@@ -242,7 +206,12 @@ public final class RKore extends SimplePlugin {
 
 
     public void onPluginStop() {
-        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cDisabled"));
+        log(1,"[&5RKore&r] &cDisabled");
+    }
+    private void log(int type, String message) {
+        if (logType == Licensing.LogType.NONE || (logType == Licensing.LogType.LOW && type == 0))
+            return;
+        console.sendMessage(ColorUtils.translateColorCodes(message));
     }
 
 }
