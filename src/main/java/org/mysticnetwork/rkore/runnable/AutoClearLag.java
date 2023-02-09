@@ -18,7 +18,7 @@ public class AutoClearLag implements Runnable {
     private String intervalFormat = Settings.ClearLag.INTERVAL_FORMAT;
     private List<String> intervalMessages = Settings.ClearLag.INTERVAL_MESSAGES;
     int removedEntities;
-    private int countdown = -1;
+    public static int countdown = -1;
 
     @Override
     public void run() {
@@ -27,12 +27,11 @@ public class AutoClearLag implements Runnable {
                 countdown = interval * 60;
             }
             if (intervalFormat.equals("hours") && countdown == -1) {
-                countdown = interval * 72000;
+                countdown = interval * 3600;
             }
             if (intervalFormat.equals("seconds") && countdown == -1) {
                 countdown = interval;
             }
-            System.out.println("Clear lag second:" + countdown);
             removedEntities = 0;
             List<String> commandList = Settings.ClearLag.COMMANDS_ON_CLEAR;
             if (countdown == 0) {

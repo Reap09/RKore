@@ -2,6 +2,8 @@ package org.mysticnetwork.rkore.model;
 
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
 import lombok.Getter;
+import org.bukkit.Server;
+import org.bukkit.command.ConsoleCommandSender;
 import org.mysticnetwork.rkore.cache.DataStorage;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -10,9 +12,12 @@ import org.mineacademy.fo.FileUtil;
 import org.mineacademy.fo.model.SimpleTime;
 import org.mineacademy.fo.settings.YamlConfig;
 import org.mineacademy.fo.visual.VisualizedRegion;
+import org.mysticnetwork.rkore.utils.ColorUtils;
 
 import java.io.File;
 import java.util.*;
+
+import static org.bukkit.Bukkit.getServer;
 
 
 @Getter
@@ -63,13 +68,13 @@ public class Schematic extends YamlConfig {
                 .filter(schematic -> schematic.getName().equalsIgnoreCase(name))
                 .findFirst().orElse(null);
     }
-
+     static Server server = getServer();
+    static ConsoleCommandSender console = server.getConsoleSender();
     public static void loadAll() {
         byName.clear();
         for (final File file : FileUtil.getFiles("Schematic", "schematic")) {
             new Schematic(file);
-        }
-        Common.logNoPrefix("Schematic Loaded: " + getSchematics().size());
+        };
     }
 
     public void paste(Location location, int rotation, boolean withAir) {

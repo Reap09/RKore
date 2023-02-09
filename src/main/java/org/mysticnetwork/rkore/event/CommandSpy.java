@@ -36,7 +36,6 @@ public class CommandSpy implements Listener {
     List<String> blackListedCmds = Settings.CommandSpy.InGame.BLACKLISTED_CMDS;
 
     PlayerHead playerHead = new PlayerHead();
-    //ProxiedPlayer
 
 
 
@@ -64,11 +63,15 @@ public class CommandSpy implements Listener {
                 String discordRTime = "<t:" + unixTime + ":R>";
                 UserManager lp = LuckPermsProvider.get().getUserManager();
                 User user = lp.getUser(executor);
-                assert user != null;
                 String lpGroup = user.getPrimaryGroup();
                 CachedDataManager userData = user.getCachedData();
                 String lpPrefix = userData.getMetaData().getPrefix();
-                assert lpPrefix != null;
+                if (lpPrefix == null) {
+                    lpPrefix = "no-prefix";
+                }
+                if (lpGroup == null) {
+                    lpGroup = "no-group";
+                }
                 String translatedPrefix = ColorUtils.translateColorCodes(lpPrefix);
                 String serverName = player.getServer().getServerName();
                 String playerName = e.getPlayer().getName();
@@ -80,6 +83,30 @@ public class CommandSpy implements Listener {
                     }
                 }
                 String message = String.join("\\n", messages);
+                int titleLength = Settings.CommandSpy.Discord.Embed.TITLE.length();
+                int fieldsCount = messages.size();
+                int footerLength = Settings.CommandSpy.Discord.Embed.FOOTER
+                        .replace("{player}", executor)
+                        .replace("{cmd}", cmd)
+                        .replace("{time}", discordTime)
+                        .replace("{server}", serverName)
+                        .replace("{lp-group}", lpGroup)
+                        .replace("{lp-prefix}", translatedPrefix).length();
+                if (titleLength > 256) {
+                    console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cTitle length exceeded the limit of 256 characters. Current length is: " + titleLength));
+                    console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cPlease adjust the config file to fix this issue."));
+                    return;
+                }
+                if (fieldsCount > 25) {
+                    console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cFields count exceeded the limit of 25. Current count is: " + fieldsCount));
+                    console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cPlease adjust the config file to fix this issue."));
+                    return;
+                }
+                if (footerLength > 2048) {
+                    console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cFooter length exceeded the limit of 2048 characters. Current length is: " + footerLength));
+                    console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cPlease adjust the config file to fix this issue."));
+                    return;
+                }
                 if (Settings.CommandSpy.InGame.ENABLED) {
                     for (Player p : Bukkit.getOnlinePlayers()) {
                         if (spyingPlayers.contains(p)) {
@@ -98,7 +125,7 @@ public class CommandSpy implements Listener {
                     }
                 }
                 if (Settings.CommandSpy.Discord.ENABLED) {
-                    DiscordWebhook webhook = new DiscordWebhook(RKore.WEBHOOK_URL);
+                    DiscordWebhook webhook = new DiscordWebhook(Settings.CommandSpy.Discord.WEBHOOK_URL);
                     webhook.setAvatarUrl(Settings.CommandSpy.Discord.WEBHOOK_AVATAR
                             .replace("{player}", executor)
                             .replace("{cmd}", cmd)
@@ -155,8 +182,9 @@ public class CommandSpy implements Listener {
                     } try {
                         webhook.execute();
                     } catch (java.io.IOException ioException) {
-                        getLogger().severe(ioException.getStackTrace().toString());
-                        System.out.println(ioException);
+                        console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cCouldn't find a valid discord webhook url in settings.yml for command spy at: &4" + Settings.CommandSpy.Discord.WEBHOOK_URL));
+                    } catch (NullPointerException nullPointerException) {
+                        System.out.println(nullPointerException);
                     }
                 }
             }

@@ -25,20 +25,8 @@ public final class SchemBuilderCommandGroup extends SimpleCommandGroup {
 
     @Override
     protected void registerSubcommands() {
-        if (Settings.FlySpeedLimiter.ENABLED) {
-            registerSubcommand(new FlySpeedLimiterToggleBypass(this));
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &aFly Speed Limiter Toggle Enabled"));
-        } else {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cFly Speed Limiter Toggle Disabled"));
-        }
 
-
-        if (Settings.ClearLag.ENABLED) {
-            registerSubcommand(new ClearLag(this));
-        } else {
-            console.sendMessage(ColorUtils.translateColorCodes("[&5RKore&r] &cClear lag Command Disabled"));
-        }
-
+        console.sendMessage(ColorUtils.translateColorCodes("[&dRKore licensing&r] Current license key in config.yml:&d " + Settings.LICENSE_KEY));
 
         if (Settings.SchemBuilder.ENABLED) {
             registerSubcommand(new SchemCommandGive(this));

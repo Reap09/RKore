@@ -15,7 +15,8 @@ public class SchemCommandGive extends SimpleSubCommand {
         super(parent, "give");
         setDescription(Settings.SchemBuilder.Messages.COMMAND_GIVE_DESCRIPTION);
         setPermission(Settings.SchemBuilder.General.SCHEMATIC_PERMISSION);
-        setPermissionMessage(Settings.SchemBuilder.Messages.COMMAND_NO_PERMISSION);
+        setPermissionMessage(Settings.SchemBuilder.Messages.COMMAND_NO_PERMISSION
+                .replace("{prefix}", Settings.PREFIX));
         setUsage("<player> <name> [with_air]");
         setMinArguments(2);
     }
@@ -40,17 +41,14 @@ public class SchemCommandGive extends SimpleSubCommand {
                 player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_NO_SCHEMATIC_FOUND
                         .replace("{name}", param)
                         .replace("{prefix}", Settings.PREFIX)));
-                return;
             }
             } catch (NullPointerException e) {
-                return;
             }
             boolean withAir = true;
             if (this.args.length > 2) {
                 if (!(Objects.equals(this.args[2], "true") || Objects.equals(this.args[2], "false"))) {
                     player.sendMessage((Settings.SchemBuilder.Messages.MUST_BE_BOOLEAN)
                             .replace("{prefix}", Settings.PREFIX));
-                    return;
                 }
                 withAir = Boolean.parseBoolean(this.args[2]);
             }

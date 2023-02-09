@@ -6,21 +6,21 @@ import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.types.PermissionNode;
 import net.luckperms.api.util.Tristate;
 import org.bukkit.entity.Player;
+import org.mineacademy.fo.command.SimpleCommand;
 import org.mineacademy.fo.command.SimpleCommandGroup;
-import org.mineacademy.fo.command.SimpleSubCommand;
 import org.mysticnetwork.rkore.settings.Settings;
 
 import java.util.UUID;
 
 
-public class FlySpeedLimiterToggleBypass extends SimpleSubCommand {
+public class FlySpeedLimiterToggleBypass extends SimpleCommand {
 
     private final String BYPASS_PERMISSION = Settings.FlySpeedLimiter.BYPASS_PERMISSION;
     private final String BYPASS_TOGGLE_PERMISSION = Settings.FlySpeedLimiter.BYPASS_TOGGLE_PERMISSION;
 
 
     public FlySpeedLimiterToggleBypass(SimpleCommandGroup parent) {
-        super(parent, "flyspeedbypass");
+        super("flyspeedbypass");
         setDescription(Settings.FlySpeedLimiter.BYPASS_TOGGLE_DESCRIPTION);
         setPermission(BYPASS_PERMISSION);
         setPermissionMessage(Settings.FlySpeedLimiter.BYPASS_TOGGLE_NO_PERMISSION
@@ -33,7 +33,6 @@ public class FlySpeedLimiterToggleBypass extends SimpleSubCommand {
         if (!(sender instanceof Player)) {
             sender.sendMessage(Settings.FlySpeedLimiter.BYPASS_TOGGLE_ONLY_PLAYER
                     .replace("{prefix}", Settings.PREFIX));
-            return;
         }
         Player player = (Player) sender;
         UUID uuid = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player).getUniqueId();

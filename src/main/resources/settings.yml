@@ -3,7 +3,7 @@
 #                           Created by Reap_9 for Mystic Network
 # !-------------------------------------------------------------------------------------------------!
 # Replace the 0 with your license key
-license-key: 0
+license-key: "0"
 # Do Not Edit This
 Version: 1
 # Internal prefix
@@ -18,7 +18,38 @@ Command_Aliases: [ rkore, rk ]
 # -------------------------------------------------------------------------------------------
 prefix: "&8[&5&lRKore&8]&7"
 # -------------------------------------------------------------------------------------------
-# Here you can set the main config of the Command Spy
+# Here you can set the main config of the Clear Inventory
+# -------------------------------------------------------------------------------------------
+clear-inventory:
+  enabled: true
+  aliases:
+    - 'ci'
+    - 'clear'
+    - 'clearinv'
+  description: "Clears a players inventory"
+  # For no permission set value as 'null'
+  permission: "null"
+  bypass-permission: "rkore.clearinventory.admin"
+  # Placeholders
+  # {target} --> player trying to clear
+  # {item} --> item trying to clear
+  # {time} --> time till confirm ends (seconds)
+  no-permission: "{prefix} &cYou don't have a permission to use this command"
+  only-player: "{prefix} &cThis command can only be executed by a player"
+  invalid-player: "{prefix} &7Couldn't find player, &d{target}"
+  invalid-items: "{prefix} &d{item} &7is invalid"
+  clear-self: "{prefix} You have cleared your inventory"
+  clear-target: "{prefix} You have cleared &d{target}'s &7inventory"
+  cleared-target: "{prefix} Your inventory has been cleared"
+  invalid-amount: "{prefix} &cInvalid amount specified"
+  clear-item-self: "{prefix} You have cleared &d{item} &7from your inventory"
+  clear-item-target: "{prefix} You have cleared &d{item} &7from &d{target}'s &7inventory"
+  removed-item: "{prefix} &d{item} &7has been cleared from your inventory"
+  confirm-message: "{prefix} &7To confirm clearing {target} inventory, type the command again within {time} seconds."
+  # Time until confirm voids (seconds)
+  confirm-time: 10
+# -------------------------------------------------------------------------------------------
+# Here you can set the main config of Command Spy
 # -------------------------------------------------------------------------------------------
 command-spy:
   enabled: true
@@ -34,10 +65,11 @@ command-spy:
       - 'cmdspy'
       - 'commandspy'
     description: "Logs all commands to staff and discord"
+    # Permission for /cmdspy
     permission: "rkore.cmdspy"
     no-permission: "{prefix} &cYou do not have permission to use this command"
     only-player: "{prefix} &cThis command can only be executed by a player"
-    toggle-message: "{prefix} You have toggled cmdspy {toggle}"
+    toggle-message: "{prefix} Command Spy {toggle}"
     on-placeholder: "&a&lEnabled"
     off-placeholder: "&c&lDisabled"
     # Placeholders
@@ -59,10 +91,10 @@ command-spy:
     # {time} --> the time the player executed the command
     # {r-time} --> relative discord time
     # This will only show if the embed is set to false
-    webhook-url: "https://discord.com/api/webhooks/1068685688414933102/6QlgJOn8IB4owmxsnUfbxke8-x830P5ueNxMOaVPfN2RZk0VoXK29goltE6kQdVXP1i1"
+    webhook-url: "YOUR DISCORD WEBHOOK URL"
     webhook-avatar: "https://media.discordapp.net/attachments/844887875790045204/994253196644069386/Mystic_network-01.jpg?width=676&height=676"
     webhook-username: "RKore CmdSpy"
-    message: "[{time}] [**{lp-group}**] **{player}**: {cmd}"
+    message: "[{r-time}] [**{server}**] [**{lp-group}**] **{player}**: {cmd}"
     embed:
       enabled: false
       title: "**Command Spy**"
@@ -80,9 +112,9 @@ command-spy:
         - '**Server:**'
         - '``{server}``'
         - ''
-        - '{r-time}'
+        - '{time}'
 # -------------------------------------------------------------------------------------------
-# Here you can set the main config of the Info Commands
+# Here you can set the main config of Info Commands
 # -------------------------------------------------------------------------------------------
 info-commands:
   enabled: true
@@ -90,7 +122,8 @@ info-commands:
     enabled: true
     aliases:
       - 'disc'
-    permission: "rkore.info.discord"
+    # For no permission set value as 'null'
+    permission: "null"
     message: "{prefix} &bhttps://discord.gg/mysticnetwork"
     description: "Command to show the server's discord"
     no-permission: "{prefix} &cYou do not have permission to use this command"
@@ -98,7 +131,8 @@ info-commands:
     enabled: true
     aliases:
       - 'web'
-    permission: "rkore.info.website"
+    # For no permission set value as 'null'
+    permission: "null"
     message: "{prefix} &ahttps://www.mysticnetwork.org"
     description: "Command to show the server's website"
     no-permission: "{prefix} &cYou do not have permission to use this command"
@@ -106,12 +140,13 @@ info-commands:
     enabled: true
     aliases:
       - 'stores'
-    permission: "rkore.info.store"
+    # For no permission set value as 'null'
+    permission: "null"
     message: "{prefix} &ahttps://www.mysticnetwork.org"
     description: "Command to show the server's store"
     no-permission: "{prefix} &cYou do not have permission to use this command"
 # -------------------------------------------------------------------------------------------
-# Here you can set the main config of the ClearLag
+# Here you can set the main config of ClearLag
 # -------------------------------------------------------------------------------------------
 clear-lag:
   enabled: true
@@ -120,6 +155,14 @@ clear-lag:
   description: "Clears entities in all words"
   no-permission-message: "{prefix} &cYou do not have permission to Clear lag"
   permission: "rkore.clearlag.clear"
+  # "null" equals no permission
+  time-permission: "null"
+  time-no-permission-message: "{prefix} &cYou do not have permission to view time on clear lag"
+  # Placeholders
+  # {time} --> time until next clear
+  # {time-format} --> returns value of, minutes/minute, seconds/second, hours/hours
+  time-message: "{prefix} Entities removing in &d{time} {time-format}"
+  no-time: "{prefix} There is no clear lag interval running"
   only-player: "{prefix} &cThis command can only be executed by a player"
   auto-interval: true
   interval: 30
@@ -151,9 +194,8 @@ clear-lag:
   # - SKELETON
   allowed-entities:
     - 'MOB_SPAWNER'
-    - 'SKELETON'
 # -------------------------------------------------------------------------------------------
-# Here you can set the main config of the FlySpeedLimiter
+# Here you can set the main config of FlySpeedLimiter
 # -------------------------------------------------------------------------------------------
 fly-speed-limiter:
   enabled: true
@@ -163,8 +205,23 @@ fly-speed-limiter:
     - 'fsl'
   no-permission-message: "{prefix} &cYou are trying to go above the max fly speed set to this server, lower your fly boost."
   bypass-permission: "rkore.flyspeedlimiter.bypass"
-  max-horizontal: 2.5
-  max-vertical: 1.0
+  # Debug
+  # When true, it will display all the players flyspeed with the bypass-permission.
+  # You can use this to find what you would like to set your max fly speed to.
+  # For example if you'd like to set the max fly speed to x2 you can set your own flyspeed to x2
+  # and the console will tell you how fast you are going in either horizontal or vertical speed
+  # in meters per second. You can set the max speed value to what prints in console.
+  # Keep in mind the max horizontal speed that a player can get to is when pressing down
+  # both w,a or w,d at the same time so for the best results hold w,a or w,d when testing for max speed
+  # This will also automatically turn off the checks for flyspeedlimiter, so only use this when developing
+  debug:
+    horizontal: false
+    vertical: false
+  # For no fly boost, (horizontal: 22.23, vertical: 7.6)
+  max-horizontal: 22.23
+  max-vertical: 7.6
+  # For if the player will get teleported back
+  setback: true
   kick-enabled: false
   kick-message:
     - "&8[&5&lRKore&8]"
@@ -182,7 +239,7 @@ fly-speed-limiter:
     off-placeholder: "&c&lOff"
 
 # -------------------------------------------------------------------------------------------
-# Here you can set the main config of the SchemBuilder
+# Here you can set the main config of SchemBuilder
 # -------------------------------------------------------------------------------------------
 schembuilder:
   enabled: true

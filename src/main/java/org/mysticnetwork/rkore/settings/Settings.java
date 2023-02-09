@@ -23,11 +23,53 @@ public class Settings extends SimpleSettings {
     }
 
     public static String PREFIX;
-    public static Integer LICENSE_KEY;
+    public static String LICENSE_KEY;
 
     private static void init() {
         PREFIX = ColorUtils.translateColorCodes(Settings.getString("prefix"));
-        LICENSE_KEY = Settings.getInteger("license-key");
+        LICENSE_KEY = Settings.getString("license-key");
+    }
+
+    public static class ClearInventory {
+        public static Boolean ENABLED;
+        public static List<String> ALIASES;
+        public static String DESCRIPTION;
+        public static String PERMISSION;
+        public static String BYPASS_PERMISSION;
+        public static String NO_PERMISSION;
+        public static String ONLY_PLAYER;
+        public static String INVALID_PLAYER;
+        public static String INVALID_ITEMS;
+        public static String CLEAR_SELF;
+        public static String CLEAR_TARGET;
+        public static String CLEARED_TARGET;
+        public static String INVALID_AMOUNT;
+        public static String CLEAR_ITEM_SELF;
+        public static String CLEAR_ITEM_TARGET;
+        public static String REMOVED_ITEM;
+        public static String CONFIRM_MESSAGE;
+        public static String CONFIRM_TIME;
+        private static void init() {
+            Settings.setPathPrefix("clear-inventory");
+            ENABLED = Settings.getBoolean("enabled");
+            ALIASES = Settings.getStringList("aliases");
+            DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
+            PERMISSION = ColorUtils.translateColorCodes(Settings.getString("permission"));
+            BYPASS_PERMISSION = Settings.getString("bypass-permission");
+            NO_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("no-permission"));
+            ONLY_PLAYER = ColorUtils.translateColorCodes(Settings.getString("only-player"));
+            INVALID_PLAYER = ColorUtils.translateColorCodes(Settings.getString("invalid-player"));
+            INVALID_ITEMS = ColorUtils.translateColorCodes(Settings.getString("invalid-items"));
+            CLEAR_SELF = ColorUtils.translateColorCodes(Settings.getString("clear-self"));
+            CLEAR_TARGET = ColorUtils.translateColorCodes(Settings.getString("clear-target"));
+            CLEARED_TARGET = ColorUtils.translateColorCodes(Settings.getString("cleared-target"));
+            INVALID_AMOUNT = ColorUtils.translateColorCodes(Settings.getString("invalid-amount"));
+            CLEAR_ITEM_SELF = ColorUtils.translateColorCodes(Settings.getString("clear-item-self"));
+            CLEAR_ITEM_TARGET = ColorUtils.translateColorCodes(Settings.getString("clear-item-target"));
+            REMOVED_ITEM = ColorUtils.translateColorCodes(Settings.getString("removed-item"));
+            CONFIRM_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("confirm-message"));
+            CONFIRM_TIME = Settings.getString("confirm-time");
+        }
     }
 
     public static class CommandSpy {
@@ -168,9 +210,12 @@ public class Settings extends SimpleSettings {
         public static String DESCRIPTION;
         public static String NO_PERMISSION_MESSAGE;
         public static String PERMISSION;
+        public static String TIME_PERMISSION;
+        public static String TIME_NO_PERMISSION;
+        public static String TIME_MESSAGE;
+        public static String NO_TIME;
         public static String ONLY_PLAYER;
         public static String CLEARED_MESSAGE;
-
         public static Boolean AUTO_INTERVAL;
         public static Integer INTERVAL;
         public static String INTERVAL_FORMAT;
@@ -185,6 +230,10 @@ public class Settings extends SimpleSettings {
             DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
             NO_PERMISSION_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("no-permission-message"));
             PERMISSION = Settings.getString("permission");
+            TIME_PERMISSION = Settings.getString("time-permission");
+            TIME_NO_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("time-no-permission-message"));
+            TIME_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("time-message"));
+            NO_TIME = ColorUtils.translateColorCodes(Settings.getString("no-time"));
             ONLY_PLAYER = ColorUtils.translateColorCodes(Settings.getString("only-player"));
             CLEARED_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("cleared-message"));
             AUTO_INTERVAL = Settings.getBoolean("auto-interval");
@@ -202,8 +251,11 @@ public class Settings extends SimpleSettings {
         public static List<String> ALIASES;
         public static String NO_PERMISSION_MESSAGE;
         public static String BYPASS_PERMISSION;
+        public static Boolean DEBUG_HORIZONTAL;
+        public static Boolean DEBUG_VERTICAL;
         public static Double MAX_HORIZONTAL_FLY_SPEED;
         public static Double MAX_VERTICAL_FLY_SPEED;
+        public static Boolean SETBACK;
 
         public static Boolean BYPASS_TOGGLE_ENABLED;
         public static String BYPASS_TOGGLE_DESCRIPTION;
@@ -223,8 +275,11 @@ public class Settings extends SimpleSettings {
             ALIASES = Settings.getStringList("aliases");
             NO_PERMISSION_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("no-permission-message"));
             BYPASS_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("bypass-permission"));
+            DEBUG_HORIZONTAL = Settings.getBoolean("debug.horizontal");
+            DEBUG_VERTICAL = Settings.getBoolean("debug.vertical");
             MAX_HORIZONTAL_FLY_SPEED = Settings.getDouble("max-horizontal");
             MAX_VERTICAL_FLY_SPEED = Settings.getDouble("max-vertical");
+            SETBACK = Settings.getBoolean("setback");
             KICK_ENABLED = Settings.getBoolean("kick-enabled");
             KICK_MESSAGE = Settings.getStringList("kick-message");
             Settings.setPathPrefix("fly-speed-limiter.bypass-toggle");
