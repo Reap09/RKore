@@ -11,7 +11,8 @@ public class Discord extends SimpleCommand {
         super("discord");
         setDescription(Settings.InfoCommands.DISCORD_DESCRIPTION);
         setPermission(Settings.InfoCommands.DISCORD_PERMISSION);
-        setPermissionMessage(Settings.InfoCommands.DISCORD_NO_PERMISSION.replace("{prefix}", Settings.PREFIX));
+        setPermissionMessage(Settings.InfoCommands.DISCORD_NO_PERMISSION
+                .replace("{prefix}", Settings.PREFIX));
         setAliases(Settings.InfoCommands.DISCORD_ALIASES);
         setMinArguments(0);
     }
@@ -19,9 +20,11 @@ public class Discord extends SimpleCommand {
     protected void onCommand() {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            player.sendMessage((Settings.InfoCommands.DISCORD_MESSAGE).replace("{prefix}", Settings.PREFIX));
+            player.sendMessage((Settings.InfoCommands.DISCORD_MESSAGE)
+                    .replace("{prefix}", Settings.PREFIX));
         } else {
-            sender.sendMessage((Settings.InfoCommands.DISCORD_MESSAGE).replace("{prefix}", Settings.PREFIX));
+            sender.sendMessage((Settings.InfoCommands.DISCORD_MESSAGE)
+                    .replace("{prefix}", Settings.PREFIX));
         }
     }
 }
