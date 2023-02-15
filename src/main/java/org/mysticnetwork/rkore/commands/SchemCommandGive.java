@@ -23,40 +23,41 @@ public class SchemCommandGive extends SimpleSubCommand {
 
 
     protected void onCommand() {
-        Player player = (Player) sender;
-        String argPlayer = args[0];
-        Player stringPlayer = Bukkit.getPlayer(argPlayer);
+            String argPlayer = args[0];
+            Player stringPlayer = Bukkit.getPlayer(argPlayer);
 
-        if (stringPlayer == null) {
-            player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_NO_PLAYER_FOUND)
-                    .replace("{player}", this.args[0])
-                    .replace("{prefix}", Settings.PREFIX));
+            if (stringPlayer == null) {
+                sender.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_NO_PLAYER_FOUND)
+                        .replace("{player}", this.args[0])
+                        .replace("{prefix}", Settings.PREFIX));
+            } else {
 
-        } else {
-
-            String param = this.args[1];
-            Schematic schematic = Schematic.findSchematic(param);
-            try{
-            if (schematic == null) {
-                player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_NO_SCHEMATIC_FOUND
-                        .replace("{name}", param)
-                        .replace("{prefix}", Settings.PREFIX)));
-            }
-            } catch (NullPointerException e) {
-            }
-            boolean withAir = true;
-            if (this.args.length > 2) {
-                if (!(Objects.equals(this.args[2], "true") || Objects.equals(this.args[2], "false"))) {
-                    player.sendMessage((Settings.SchemBuilder.Messages.MUST_BE_BOOLEAN)
-                            .replace("{prefix}", Settings.PREFIX));
+                String param = this.args[1];
+                Schematic schematic = Schematic.findSchematic(param);
+                try {
+                    if (schematic == null) {
+                        sender.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_NO_SCHEMATIC_FOUND
+                                .replace("{name}", param)
+                                .replace("{prefix}", Settings.PREFIX)));
+                        return;
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println(e);
                 }
-                withAir = Boolean.parseBoolean(this.args[2]);
-            }
-            schematic.giveItem(player, withAir);
-            player.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_SUCCESSFUL
+                boolean withAir = true;
+                if (this.args.length > 2) {
+                    if (!(Objects.equals(this.args[2], "true") || Objects.equals(this.args[2], "false"))) {
+                        sender.sendMessage((Settings.SchemBuilder.Messages.MUST_BE_BOOLEAN)
+                                .replace("{prefix}", Settings.PREFIX));
+                        return;
+                    }
+                    withAir = Boolean.parseBoolean(this.args[2]);
+                }
+                schematic.giveItem(stringPlayer, withAir);
+            stringPlayer.sendMessage((Settings.SchemBuilder.Messages.COMMAND_GIVE_SUCCESSFUL
                     .replace("{name}", schematic.getName())
                     .replace("{prefix}", Settings.PREFIX)));
-        }
+            }
     }
 
     protected List<String> tabComplete() {

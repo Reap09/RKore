@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
+import org.mysticnetwork.rkore.RKore;
 import org.mysticnetwork.rkore.settings.Settings;
 import org.mineacademy.fo.annotation.AutoRegister;
 import org.mineacademy.fo.command.ReloadCommand;
@@ -32,6 +33,11 @@ public final class SchemBuilderCommandGroup extends SimpleCommandGroup {
             registerSubcommand(new SchemCommandGive(this));
         }
         registerSubcommand(new ReloadCommand());
+        if (Settings.ExternalCommands.ENABLED) {
+            registerSubcommand(new ExternalCommand(this));
+        } else {
+            RKore.instance.log(1, "[&5RKore&r] &cElite Boss Command Fix Disabled");
+        }
     }
 
     @Override

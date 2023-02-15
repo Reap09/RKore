@@ -53,13 +53,13 @@ public final class RKore extends SimplePlugin {
     public void onPluginStart() {
         instance = this;
 
-        try {
-            if(!new Licensing(Settings.LICENSE_KEY, "https://androecia.com/rkore-license/verify.php", this).setSecurityKey("YecoF0I6M05thxLeokoHuW8iUhTdIUInjkfF").register()) return;
-        } catch (Error e) {
-            log(1,"[&5RKore&r] &cDisabling Plugin.");
-            setEnabled(false);
-            return;
-        }
+//        try {
+//            if(!new Licensing(Settings.LICENSE_KEY, "https://androecia.com/rkore-license/verify.php", this).setSecurityKey("YecoF0I6M05thxLeokoHuW8iUhTdIUInjkfF").register()) return;
+//        } catch (Error e) {
+//            log(1,"[&5RKore&r] &cDisabling Plugin.");
+//            setEnabled(false);
+//            return;
+//        }
 
         log(1,"[&5RKore&r] Schematics Loaded: &5" + getSchematics().size());
 
@@ -151,6 +151,7 @@ public final class RKore extends SimplePlugin {
 
 
         // Command Registration
+
         if (Settings.CommandSpy.InGame.ENABLED) {
             registerCommand(new CmdSpy(getMainCommand()));
         }
@@ -208,7 +209,7 @@ public final class RKore extends SimplePlugin {
     public void onPluginStop() {
         log(1,"[&5RKore&r] &cDisabled");
     }
-    private void log(int type, String message) {
+    public void log(int type, String message) {
         if (logType == Licensing.LogType.NONE || (logType == Licensing.LogType.LOW && type == 0))
             return;
         console.sendMessage(ColorUtils.translateColorCodes(message));
