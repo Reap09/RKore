@@ -106,6 +106,7 @@ See the [open issues](https://github.com/Reap09/RKore/issues) for a full list of
 ## Contact
 
 Discord: Reap#0001
+
 Email: contact@mysticnetwork.org
 
 Project Link: [https://github.com/Reap09/RKore](https://github.com/Reap09/RKore)
