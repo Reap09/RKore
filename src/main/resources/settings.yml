@@ -122,7 +122,7 @@ info-commands:
     enabled: true
     aliases:
       - 'disc'
-    # For no permission set value as 'null'
+    # For no permission set value as "null"
     permission: "null"
     message: "{prefix} &bhttps://discord.gg/mysticnetwork"
     description: "Command to show the server's discord"
@@ -131,7 +131,7 @@ info-commands:
     enabled: true
     aliases:
       - 'web'
-    # For no permission set value as 'null'
+    # For no permission set value as "null"
     permission: "null"
     message: "{prefix} &ahttps://www.mysticnetwork.org"
     description: "Command to show the server's website"
@@ -140,11 +140,35 @@ info-commands:
     enabled: true
     aliases:
       - 'stores'
-    # For no permission set value as 'null'
+    # For no permission set value as "null"
     permission: "null"
     message: "{prefix} &ahttps://www.mysticnetwork.org"
     description: "Command to show the server's store"
     no-permission: "{prefix} &cYou do not have permission to use this command"
+# -------------------------------------------------------------------------------------------
+# Here you can set the main config of External Commands
+#
+# this can be used to fix issues with giving permissions to bedrock players with luckperms
+# this can also be used to fix issues with giving bosses with EliteBosses to bedrock players
+#
+# Usage
+# with this command u can send commands to be performed by console
+#
+# Command Placeholders
+# br:<playername> --> returns a players name without the "." in front of the name, for example "br:.player_name" will return "player_name"
+# uuid:<playername> --> returns a players uuid, for example "uuid:player_name" will return player_name's uuid
+# -------------------------------------------------------------------------------------------
+external-commands:
+  enabled: true
+  aliases:
+    - 'eb'
+  description: "Performs commands to console to fix command issues"
+  no-permission: "{prefix} &cYou do not have permission to use External Commands"
+  permission: "rkore.externalcommands"
+  success-message-on: true
+  success-message: "{prefix} successfully executed: &d{cmd}"
+  no-player: "{prefix} I could not find any player with the name, &d{player}"
+  bedrock-prefix: "."
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of ClearLag
 # -------------------------------------------------------------------------------------------

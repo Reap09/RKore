@@ -30,6 +30,30 @@ public class Settings extends SimpleSettings {
         LICENSE_KEY = Settings.getString("license-key");
     }
 
+    public static class ExternalCommands {
+        public static Boolean ENABLED;
+        public static List<String> ALIASES;
+        public static String DESCRIPTION;
+        public static String PERMISSION;
+        public static String NO_PERMISSION;
+        public static Boolean SUCCESS_MESSAGE_ON;
+        public static String SUCCESS_MESSAGE;
+        public static String NO_PLAYER;
+        public static String BEDROCK_PREFIX;
+        private static void init() {
+            Settings.setPathPrefix("external-commands");
+            ENABLED = Settings.getBoolean("enabled");
+            ALIASES = Settings.getStringList("aliases");
+            DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
+            PERMISSION = ColorUtils.translateColorCodes(Settings.getString("permission"));
+            NO_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("no-permission"));
+            SUCCESS_MESSAGE_ON = Settings.getBoolean("success-message-on");
+            SUCCESS_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("success-message"));
+            NO_PLAYER = ColorUtils.translateColorCodes(Settings.getString("no-player"));
+            BEDROCK_PREFIX = Settings.getString("bedrock-prefix");
+        }
+    }
+
     public static class ClearInventory {
         public static Boolean ENABLED;
         public static List<String> ALIASES;
@@ -356,7 +380,7 @@ public class Settings extends SimpleSettings {
                 SCHEMATIC_ROTATION_OVER_LAPPING = ColorUtils.translateColorCodes(Settings.getString("rotation-over-lapping"));
                 Settings.setPathPrefix("schembuilder.messages.commands");
                 COMMAND_HEADER_PREFIX = ColorUtils.translateColorCodes(Settings.getString("header-prefix"));
-                COMMAND_CREDITS = ColorUtils.translateColorCodes("Plugin Created by Reap_9 and SpiderDeluxe");
+                COMMAND_CREDITS = ColorUtils.translateColorCodes("Plugin Created by Reap#0001");
                 COMMAND_NO_PERMISSION = ColorUtils.translateColorCodes("give.no-permission");
                 COMMAND_GIVE_DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("give.description"));
                 COMMAND_GIVE_NO_PLAYER_FOUND = ColorUtils.translateColorCodes(Settings.getString("give.no-player-found"));
