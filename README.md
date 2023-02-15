@@ -78,18 +78,12 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+1. Purchase a license from the [Androecia Development Discord](https://discord.gg/CHANNEL_LINK)
+2. Download the latest jar from [Downloads](https://discord.gg/CHANNELLINK)
+3. Insert into your servers plugins folder and restart/start your server
+4. Enter your license key `settings.yml`
+   ```yml
+   license-key: "0000-0000-0000-0000"
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -112,9 +106,10 @@ See the [open issues](https://github.com/Reap09/RKore/issues) for a full list of
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Discord: Reap#0001
+Email: contact@mysticnetwork.org
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/Reap09/RKore](https://github.com/Reap09/RKore)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
