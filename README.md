@@ -39,8 +39,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Features</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#how-to-use">How to Use</a></li>
   </ol>
@@ -88,7 +87,7 @@ This is how you download and successfully active the plugin!
 
 
 
-<!-- ROADMAP -->
+<!-- FEATURES -->
 ## Features
 
 - [ ] Feature 1
