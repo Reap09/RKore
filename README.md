@@ -40,9 +40,9 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#roadmap">Features</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#how-to-use">How to Use</a></li>
   </ol>
 </details>
 
@@ -71,10 +71,9 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is how you download and successfully active the plugin!
 
-
+<!-- INSTALLATION -->
 ### Installation
 
 1. Purchase a license from the [Androecia Development Discord](https://discord.gg/CHANNEL_LINK)
@@ -83,7 +82,7 @@ To get a local copy up and running follow these simple example steps.
 4. Enter your license key `settings.yml`
    ```yml
    license-key: "0000-0000-0000-0000"
-   ```
+   ``
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -91,7 +90,7 @@ To get a local copy up and running follow these simple example steps.
 
 
 <!-- ROADMAP -->
-## Roadmap
+## Features
 
 - [ ] Feature 1
 - [ ] Feature 2
@@ -115,12 +114,10 @@ Project Link: [https://github.com/Reap09/RKore](https://github.com/Reap09/RKore)
 
 
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+<!-- HOW TO USE -->
+## How to use
 
-* []()
-* []()
-* []()
+This is where i will make a explenation for using RKore
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
