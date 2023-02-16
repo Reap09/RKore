@@ -292,6 +292,7 @@ public class Settings extends SimpleSettings {
         public static String BYPASS_TOGGLE_OFF;
         public static Boolean KICK_ENABLED;
         public static List<String> KICK_MESSAGE;
+        public static String BEDROCK_PLAYER;
 
         private static void init() {
             Settings.setPathPrefix("fly-speed-limiter");
@@ -299,6 +300,7 @@ public class Settings extends SimpleSettings {
             ALIASES = Settings.getStringList("aliases");
             NO_PERMISSION_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("no-permission-message"));
             BYPASS_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("bypass-permission"));
+            BEDROCK_PLAYER = Settings.getString("bedrock-bypass-permission");
             DEBUG_HORIZONTAL = Settings.getBoolean("debug.horizontal");
             DEBUG_VERTICAL = Settings.getBoolean("debug.vertical");
             MAX_HORIZONTAL_FLY_SPEED = Settings.getDouble("max-horizontal");

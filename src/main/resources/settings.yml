@@ -229,6 +229,11 @@ fly-speed-limiter:
     - 'fsl'
   no-permission-message: "{prefix} &cYou are trying to go above the max fly speed set to this server, lower your fly boost."
   bypass-permission: "rkore.flyspeedlimiter.bypass"
+  # IF YOU HAVE BEDROCK SUPPORT YOU MUST USE THIS TO BYPASS THEM FROM CERTAIN CHECKS
+  # to automatically give the bedrock player a permission on join use BedrockPlayerManager, this is also useful for
+  # java anti-cheats that don't detect bedrock players!
+  # (https://www.spigotmc.org/resources/bedrock-player-managment-for-floodgate-geyser.82278/)
+  bedrock-bypass-permission: "rkore.flyspeedlimiter.bedrock"
   # Debug
   # When true, it will display all the players flyspeed with the bypass-permission.
   # You can use this to find what you would like to set your max fly speed to.
