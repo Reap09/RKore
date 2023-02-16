@@ -28,7 +28,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-rkore">About RKore</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -48,8 +48,8 @@
 
 
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+<!-- ABOUT RKORE -->
+## About RKore
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
@@ -57,8 +57,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
+<!-- BUILT WITH -->
 ### Built With
 
 * [![Java][Java.com]][Java-url]
@@ -115,7 +114,7 @@ Project Link: [https://github.com/Reap09/RKore](https://github.com/Reap09/RKore)
 
 
 <!-- HOW TO USE -->
-## How to use
+## How To Use
 
 This is where i will make a explenation for using RKore
 
