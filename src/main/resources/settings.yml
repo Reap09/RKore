@@ -99,7 +99,8 @@ command-spy:
       enabled: false
       title: "**Command Spy**"
       color: "#8f6be4"
-      thumbnail: "https://media.discordapp.net/attachments/844887875790045204/994253196644069386/Mystic_network-01.jpg?width=676&height=676"
+      # this supports urls for images and {player-head} for the players head
+      thumbnail: "{player-head}"
       # {time} does not show in footers
       footer: "{server} | {player}"
       messages:
