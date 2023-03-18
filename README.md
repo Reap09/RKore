@@ -28,7 +28,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-rkore">About RKore</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -39,17 +39,16 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#how-to-use">How to Use</a></li>
   </ol>
 </details>
 
 
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+<!-- ABOUT RKORE -->
+## About RKore
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
@@ -57,8 +56,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
+<!-- BUILT WITH -->
 ### Built With
 
 * [![Java][Java.com]][Java-url]
@@ -71,10 +69,9 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is how you download and successfully active the plugin!
 
-
+<!-- INSTALLATION -->
 ### Installation
 
 1. Purchase a license from the [Androecia Development Discord](https://discord.gg/CHANNEL_LINK)
@@ -83,15 +80,15 @@ To get a local copy up and running follow these simple example steps.
 4. Enter your license key `settings.yml`
    ```yml
    license-key: "0000-0000-0000-0000"
-   ```
+   ``
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 
-<!-- ROADMAP -->
-## Roadmap
+<!-- FEATURES -->
+## Features
 
 - [ ] Feature 1
 - [ ] Feature 2
@@ -115,12 +112,10 @@ Project Link: [https://github.com/Reap09/RKore](https://github.com/Reap09/RKore)
 
 
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+<!-- HOW TO USE -->
+## How To Use
 
-* []()
-* []()
-* []()
+This is where i will make a explenation for using RKore
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
