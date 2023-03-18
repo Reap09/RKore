@@ -22,7 +22,7 @@ public class FlySpeedLimiterToggleBypass extends SimpleCommand {
     public FlySpeedLimiterToggleBypass(SimpleCommandGroup parent) {
         super("flyspeedbypass");
         setDescription(Settings.FlySpeedLimiter.BYPASS_TOGGLE_DESCRIPTION);
-        setPermission(BYPASS_PERMISSION);
+        setPermission(null);
         setPermissionMessage(Settings.FlySpeedLimiter.BYPASS_TOGGLE_NO_PERMISSION
                 .replace("{prefix}", Settings.PREFIX));
         setAliases(Settings.FlySpeedLimiter.ALIASES);
@@ -33,6 +33,12 @@ public class FlySpeedLimiterToggleBypass extends SimpleCommand {
         if (!(sender instanceof Player)) {
             sender.sendMessage(Settings.FlySpeedLimiter.BYPASS_TOGGLE_ONLY_PLAYER
                     .replace("{prefix}", Settings.PREFIX));
+            return;
+        }
+        if (!(sender.hasPermission(Settings.FlySpeedLimiter.BYPASS_PERMISSION) || Settings.FlySpeedLimiter.BYPASS_PERMISSION.equals("null"))) {
+            sender.sendMessage(Settings.FlySpeedLimiter.BYPASS_TOGGLE_NO_PERMISSION
+                    .replace("{prefix}", Settings.PREFIX));
+            return;
         }
         Player player = (Player) sender;
         UUID uuid = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player).getUniqueId();
@@ -49,7 +55,7 @@ public class FlySpeedLimiterToggleBypass extends SimpleCommand {
                 player.sendMessage(Settings.FlySpeedLimiter.BYPASS_TOGGLE_MESSAGE
                         .replace("{toggle}", Settings.FlySpeedLimiter.BYPASS_TOGGLE_ON)
                         .replace("{prefix}", Settings.PREFIX));
-            } else if (bypassTogglePermission.asBoolean()){
+            } else if (bypassTogglePermission.asBoolean()) {
                 user.data().remove(PermissionNode.builder(BYPASS_TOGGLE_PERMISSION).build());
                 api.getUserManager().saveUser(user);
                 player.sendMessage(Settings.FlySpeedLimiter.BYPASS_TOGGLE_MESSAGE

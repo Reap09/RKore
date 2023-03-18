@@ -18,11 +18,8 @@ public class ClearInventory extends SimpleCommand {
 
     public ClearInventory(SimpleCommandGroup parent) {
         super("clearinventory");
-        if (Settings.ClearInventory.PERMISSION.equals("null")) {
-            Settings.ClearInventory.PERMISSION = null;
-        }
         setDescription(Settings.ClearInventory.DESCRIPTION);
-        setPermission(Settings.ClearInventory.PERMISSION);
+        setPermission(null);
         setPermissionMessage(Settings.ClearInventory.NO_PERMISSION
                 .replace("{prefix}", Settings.PREFIX));
         setAliases(Settings.ClearInventory.ALIASES);
@@ -31,10 +28,16 @@ public class ClearInventory extends SimpleCommand {
 
     RKore plugin = (RKore) Bukkit.getPluginManager().getPlugin("RKore");
     Map<UUID, Timestamp> confirmations = plugin.getConfirmations();
+    List<String> commandList = Settings.ClearInventory.CONSOLE_CMDS_ON_CLEAR;
 
     protected void onCommand() {
         if (!(sender instanceof Player)) {
             sender.sendMessage(Settings.ClearInventory.ONLY_PLAYER
+                    .replace("{prefix}", Settings.PREFIX));
+            return;
+        }
+        if (!(sender.hasPermission(Settings.ClearInventory.PERMISSION) || Settings.ClearInventory.PERMISSION.equals("null"))) {
+            sender.sendMessage(Settings.ClearInventory.NO_PERMISSION
                     .replace("{prefix}", Settings.PREFIX));
             return;
         }
@@ -69,6 +72,10 @@ public class ClearInventory extends SimpleCommand {
                     if (item == null) {
                         target.getInventory().clear();
                         target.getInventory().setArmorContents(null);
+                        for (String commandString : commandList) {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), commandString.replace("{player}", target.getName()));
+
+                        }
                         sender.sendMessage((target == player ? (Settings.ClearInventory.CLEAR_SELF
                                 .replace("{prefix}", Settings.PREFIX)) : (Settings.ClearInventory.CLEAR_TARGET)
                                 .replace("{prefix}", Settings.PREFIX)
@@ -102,7 +109,10 @@ public class ClearInventory extends SimpleCommand {
                             item.setAmount(amount);
                         }
                         target.getInventory().removeItem(item);
-                        target.getInventory().setArmorContents(null);
+                        for (String commandString : commandList) {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), commandString.replace("{player}", target.getName()));
+
+                        }
                         sender.sendMessage((target == sender ? Settings.ClearInventory.CLEAR_ITEM_SELF
                                 .replace("{prefix}", Settings.PREFIX) : Settings.ClearInventory.CLEAR_ITEM_TARGET
                                 .replace("{prefix}", Settings.PREFIX))
@@ -131,6 +141,10 @@ public class ClearInventory extends SimpleCommand {
             if (item == null) {
                 target.getInventory().clear();
                 target.getInventory().setArmorContents(null);
+                for (String commandString : commandList) {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), commandString.replace("{player}", target.getName()));
+
+                }
                 sender.sendMessage((target == player ? (Settings.ClearInventory.CLEAR_SELF
                         .replace("{prefix}", Settings.PREFIX)) : (Settings.ClearInventory.CLEAR_TARGET)
                         .replace("{prefix}", Settings.PREFIX)
@@ -163,7 +177,10 @@ public class ClearInventory extends SimpleCommand {
                     item.setAmount(amount);
                 }
                 target.getInventory().removeItem(item);
-                target.getInventory().setArmorContents(null);
+                for (String commandString : commandList) {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), commandString.replace("{player}", target.getName()));
+
+                }
                 sender.sendMessage((target == sender ? Settings.ClearInventory.CLEAR_ITEM_SELF
                         .replace("{prefix}", Settings.PREFIX) : Settings.ClearInventory.CLEAR_ITEM_TARGET
                         .replace("{prefix}", Settings.PREFIX))

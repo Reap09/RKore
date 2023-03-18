@@ -53,13 +53,13 @@ public final class RKore extends SimplePlugin {
     public void onPluginStart() {
         instance = this;
 
-//        try {
-//            if(!new Licensing(Settings.LICENSE_KEY, "https://androecia.com/rkore-license/verify.php", this).setSecurityKey("YecoF0I6M05thxLeokoHuW8iUhTdIUInjkfF").register()) return;
-//        } catch (Error e) {
-//            log(1,"[&5RKore&r] &cDisabling Plugin.");
-//            setEnabled(false);
-//            return;
-//        }
+        try {
+            if(!new Licensing(Settings.LICENSE_KEY, "https://androecia.com/rkore-license/verify.php", this).setSecurityKey("YecoF0I6M05thxLeokoHuW8iUhTdIUInjkfF").register()) return;
+        } catch (Error e) {
+            log(1,"[&5RKore&r] &cDisabling Plugin.");
+            setEnabled(false);
+            return;
+        }
 
         log(1,"[&5RKore&r] Schematics Loaded: &5" + getSchematics().size());
 

@@ -18,7 +18,7 @@ public class ExternalCommand extends SimpleSubCommand {
     public ExternalCommand(SimpleCommandGroup parent) {
         super(parent, "external");
         setDescription(Settings.ExternalCommands.DESCRIPTION);
-        setPermission(Settings.ExternalCommands.PERMISSION);
+        setPermission(null);
         setPermissionMessage(Settings.ExternalCommands.NO_PERMISSION
                 .replace("{prefix}", Settings.PREFIX));
         setAliases(Settings.ExternalCommands.ALIASES);
@@ -26,6 +26,14 @@ public class ExternalCommand extends SimpleSubCommand {
     }
 
     protected void onCommand() {
+        if (sender instanceof Player) {
+            if (!(sender.hasPermission(Settings.ExternalCommands.PERMISSION) || Settings.ExternalCommands.PERMISSION.equals("null"))) {
+                sender.sendMessage(Settings.ExternalCommands.NO_PERMISSION
+                        .replace("{prefix}", Settings.PREFIX));
+                return;
+            }
+        }
+
 
         String externalCmd = String.join(" ", args);
 

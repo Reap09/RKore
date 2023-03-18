@@ -16,7 +16,7 @@ public class CmdSpy extends SimpleCommand implements Listener {
     public CmdSpy(SimpleCommandGroup parent) {
         super("cmdspy");
         setDescription(Settings.CommandSpy.InGame.DESCRIPTION);
-        setPermission(Settings.CommandSpy.InGame.PERMISSION);
+        setPermission(null);
         setPermissionMessage(Settings.CommandSpy.InGame.NO_PERMISSION
                 .replace("{prefix}", Settings.PREFIX));
         setAliases(Settings.CommandSpy.InGame.ALIASES);
@@ -29,6 +29,11 @@ public class CmdSpy extends SimpleCommand implements Listener {
 
     protected void onCommand() {
         if (sender instanceof Player) {
+                if (!(sender.hasPermission(Settings.CommandSpy.InGame.PERMISSION) || Settings.CommandSpy.InGame.PERMISSION.equals("null"))) {
+                    sender.sendMessage(Settings.CommandSpy.InGame.NO_PERMISSION
+                            .replace("{prefix}", Settings.PREFIX));
+                    return;
+                }
             Player player = (Player) sender;
             if (args.length == 0) {
                 if (spyingPlayers.contains(player)) {

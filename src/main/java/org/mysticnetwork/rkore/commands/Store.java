@@ -10,7 +10,7 @@ public class Store extends SimpleCommand {
     public Store(SimpleCommandGroup parent) {
         super("store");
         setDescription(Settings.InfoCommands.STORE_DESCRIPTION);
-        setPermission(Settings.InfoCommands.STORE_PERMISSION);
+        setPermission(null);
         setPermissionMessage(Settings.InfoCommands.STORE_NO_PERMISSION
                 .replace("{prefix}", Settings.PREFIX));
         setAliases(Settings.InfoCommands.STORE_ALIASES);
@@ -19,9 +19,14 @@ public class Store extends SimpleCommand {
 
     protected void onCommand() {
         if (sender instanceof Player) {
-            Player player = (Player) sender;
-            player.sendMessage((Settings.InfoCommands.STORE_MESSAGE)
-                    .replace("{prefix}", Settings.PREFIX));
+            if (sender.hasPermission(Settings.InfoCommands.STORE_PERMISSION) || Settings.InfoCommands.STORE_PERMISSION.equals("null")) {
+                Player player = (Player) sender;
+                player.sendMessage((Settings.InfoCommands.STORE_MESSAGE)
+                        .replace("{prefix}", Settings.PREFIX));
+            } else {
+                sender.sendMessage(Settings.InfoCommands.STORE_NO_PERMISSION
+                        .replace("{prefix}", Settings.PREFIX));
+            }
         } else {
             sender.sendMessage((Settings.InfoCommands.STORE_MESSAGE)
                     .replace("{prefix}", Settings.PREFIX));

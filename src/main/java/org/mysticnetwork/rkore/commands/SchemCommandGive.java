@@ -14,7 +14,7 @@ public class SchemCommandGive extends SimpleSubCommand {
     public SchemCommandGive(SimpleCommandGroup parent) {
         super(parent, "give");
         setDescription(Settings.SchemBuilder.Messages.COMMAND_GIVE_DESCRIPTION);
-        setPermission(Settings.SchemBuilder.General.SCHEMATIC_PERMISSION);
+        setPermission(null);
         setPermissionMessage(Settings.SchemBuilder.Messages.COMMAND_NO_PERMISSION
                 .replace("{prefix}", Settings.PREFIX));
         setUsage("<player> <name> [with_air]");
@@ -23,6 +23,13 @@ public class SchemCommandGive extends SimpleSubCommand {
 
 
     protected void onCommand() {
+        if (sender instanceof Player) {
+            if (!(sender.hasPermission(Settings.SchemBuilder.General.SCHEMATIC_PERMISSION) || Settings.SchemBuilder.General.SCHEMATIC_PERMISSION.equals("null"))) {
+                sender.sendMessage(Settings.SchemBuilder.Messages.COMMAND_NO_PERMISSION
+                        .replace("{prefix}", Settings.PREFIX));
+                return;
+            }
+        }
             String argPlayer = args[0];
             Player stringPlayer = Bukkit.getPlayer(argPlayer);
 
