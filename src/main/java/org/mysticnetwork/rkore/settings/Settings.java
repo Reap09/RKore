@@ -73,6 +73,7 @@ public class Settings extends SimpleSettings {
         public static String REMOVED_ITEM;
         public static String CONFIRM_MESSAGE;
         public static String CONFIRM_TIME;
+        public static List<String> CONSOLE_CMDS_ON_CLEAR;
         private static void init() {
             Settings.setPathPrefix("clear-inventory");
             ENABLED = Settings.getBoolean("enabled");
@@ -93,6 +94,7 @@ public class Settings extends SimpleSettings {
             REMOVED_ITEM = ColorUtils.translateColorCodes(Settings.getString("removed-item"));
             CONFIRM_MESSAGE = ColorUtils.translateColorCodes(Settings.getString("confirm-message"));
             CONFIRM_TIME = Settings.getString("confirm-time");
+            CONSOLE_CMDS_ON_CLEAR = Settings.getStringList("console-cmds-on-clear");
         }
     }
 
@@ -383,7 +385,7 @@ public class Settings extends SimpleSettings {
                 Settings.setPathPrefix("schembuilder.messages.commands");
                 COMMAND_HEADER_PREFIX = ColorUtils.translateColorCodes(Settings.getString("header-prefix"));
                 COMMAND_CREDITS = ColorUtils.translateColorCodes("Plugin Created by Reap#0001");
-                COMMAND_NO_PERMISSION = ColorUtils.translateColorCodes("give.no-permission");
+                COMMAND_NO_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("give.no-permission"));
                 COMMAND_GIVE_DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("give.description"));
                 COMMAND_GIVE_NO_PLAYER_FOUND = ColorUtils.translateColorCodes(Settings.getString("give.no-player-found"));
                 COMMAND_GIVE_NO_SCHEMATIC_FOUND = ColorUtils.translateColorCodes(Settings.getString("give.no-schematic-found"));

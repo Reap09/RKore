@@ -48,6 +48,10 @@ clear-inventory:
   confirm-message: "{prefix} &7To confirm clearing {target} inventory, type the command again within {time} seconds."
   # Time until confirm voids (seconds)
   confirm-time: 10
+  # Placeholders
+  # {player} --> player who executed the clearinventory command
+  console-cmds-on-clear:
+    - "effect {player} clear"
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of Command Spy
 # -------------------------------------------------------------------------------------------
