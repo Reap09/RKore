@@ -95,8 +95,6 @@ public class FlySpeedLimiter implements Listener {
                         }
                     }
                 }
-            } else {
-                System.out.println(player + "is in water");
             }
         }
     }
