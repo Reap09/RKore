@@ -11,8 +11,6 @@
 
   <p align="center">
     <br />
-    <a href="https://github.com/Reap_9/RKore"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/Reap09/RKore/issues">Report Bug</a>
     |
