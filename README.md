@@ -25,9 +25,6 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -39,6 +36,7 @@
     <li><a href="#commands">Commands</a></li>
     <li><a href="#permissions">Permissions</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#built-with">Built With</a></li>
     <li><a href="#how-to-use">How to Use</a></li>
   </ol>
 </details>
