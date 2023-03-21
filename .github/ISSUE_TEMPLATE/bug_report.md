@@ -1,6 +1,6 @@
 name: Bug Report
 description: Report a bug with AE.
-labels: ["Bug: Unconfirmed"]
+labels: bug
 body:
   - type: markdown
     attributes:
