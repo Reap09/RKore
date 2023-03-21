@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a bug with AE.
+description: Report a bug with RKore.
 labels: ["Bug: Unconfirmed"]
 body:
   - type: markdown
