@@ -10,30 +10,20 @@
 <h3 align="center">RKore</h3>
 
   <p align="center">
-    Schematic Builder - Add schematics that place with a set duration and you can rotate the schematic via right clicking after placing the schem a gui will appear to change the direction and you may also cancel the placement and it will return the item to you! It has a set time you can configure in the config so it may take 10seconds to place or 10mins its up to you, you can add unlimited amount of cannon/build/anything you desire! (per schematic permissions coming soon), you can give the player a schembuilder via command, or make a ShopGUI+ shop! (DankOfUK will provide a free config for shopgui+)
-Fly Boost Limiter - This is to stop the fly boosting on your server, players who use faction/pvp clients tent to have a fly boosting feature, as server owners this is hard to patch and ClearLagg doesn't have a staff bypass, RKore does have a staff bypass, and it works via blocks per second, so you can accurately determine the player speed and stop them via placing them back to their previous location that they flyboosted from, you can either set the player back and send a chat message, or toggle a option to enable a kick message and set player back, it is fully configurable!
-Clear Lag - This is similar to ClearLag but is also has a few features that are unique, it has commands on clear, and customizable messages to send, and is toggleable to if you preview your clearlag option you can disable this.
-Clear Inventory Confirm - A essentials feature to most servers to allow players to confirm they want to clear their inventory! can also be disabled if you use another plugin for such things!
-Command Spy - A Simple but essentials feature for staff members to spy on players and what commands they are doing!
-
     <br />
     <a href="https://github.com/Reap_9/RKore"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Reap09/RKore/issues">Report Bug</a>
-    ·
     <a href="https://github.com/Reap09/RKore/issues">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-rkore">About RKore</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -45,19 +35,12 @@ Command Spy - A Simple but essentials feature for staff members to spy on player
       </ul>
     </li>
     <li><a href="#features">Features</a></li>
+    <li><a href="#commands">Commands</a></li>
+    <li><a href="#permissions">Permissions</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#how-to-use">How to Use</a></li>
   </ol>
 </details>
-
-
-
-<!-- ABOUT RKORE -->
-## About RKore
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- BUILT WITH -->
 ### Built With
