@@ -27,7 +27,7 @@ public class ExternalCommand extends SimpleSubCommand {
 
     protected void onCommand() {
         if (sender instanceof Player) {
-            if (!(sender.hasPermission(Settings.ExternalCommands.PERMISSION) || Settings.ExternalCommands.PERMISSION.equals("null"))) {
+            if (!(sender.hasPermission(Settings.ExternalCommands.PERMISSION) || Settings.ExternalCommands.PERMISSION.equals("none"))) {
                 sender.sendMessage(Settings.ExternalCommands.NO_PERMISSION
                         .replace("{prefix}", Settings.PREFIX));
                 return;

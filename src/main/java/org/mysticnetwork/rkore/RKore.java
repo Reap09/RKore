@@ -3,6 +3,7 @@ package org.mysticnetwork.rkore;
 import java.sql.Timestamp;
 import java.util.*;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -52,14 +53,6 @@ public final class RKore extends SimplePlugin {
 
     public void onPluginStart() {
         instance = this;
-
-        try {
-            if(!new Licensing(Settings.LICENSE_KEY, "https://androecia.com/rkore-license/verify.php", this).setSecurityKey("YecoF0I6M05thxLeokoHuW8iUhTdIUInjkfF").register()) return;
-        } catch (Error e) {
-            log(1,"[&5RKore&r] &cDisabling Plugin.");
-            setEnabled(false);
-            return;
-        }
 
         log(1,"[&5RKore&r] Schematics Loaded: &5" + getSchematics().size());
 
@@ -214,5 +207,7 @@ public final class RKore extends SimplePlugin {
             return;
         console.sendMessage(ColorUtils.translateColorCodes(message));
     }
+    Boolean papiEnabled = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
+
 
 }

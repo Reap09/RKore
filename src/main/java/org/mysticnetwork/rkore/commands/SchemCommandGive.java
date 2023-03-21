@@ -24,7 +24,7 @@ public class SchemCommandGive extends SimpleSubCommand {
 
     protected void onCommand() {
         if (sender instanceof Player) {
-            if (!(sender.hasPermission(Settings.SchemBuilder.General.SCHEMATIC_PERMISSION) || Settings.SchemBuilder.General.SCHEMATIC_PERMISSION.equals("null"))) {
+            if (!(sender.hasPermission(Settings.SchemBuilder.General.SCHEMATIC_PERMISSION) || Settings.SchemBuilder.General.SCHEMATIC_PERMISSION.equals("none"))) {
                 sender.sendMessage(Settings.SchemBuilder.Messages.COMMAND_NO_PERMISSION
                         .replace("{prefix}", Settings.PREFIX));
                 return;

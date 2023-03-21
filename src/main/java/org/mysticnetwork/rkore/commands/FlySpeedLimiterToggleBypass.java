@@ -35,7 +35,7 @@ public class FlySpeedLimiterToggleBypass extends SimpleCommand {
                     .replace("{prefix}", Settings.PREFIX));
             return;
         }
-        if (!(sender.hasPermission(Settings.FlySpeedLimiter.BYPASS_PERMISSION) || Settings.FlySpeedLimiter.BYPASS_PERMISSION.equals("null"))) {
+        if (!(sender.hasPermission(Settings.FlySpeedLimiter.BYPASS_PERMISSION) || Settings.FlySpeedLimiter.BYPASS_PERMISSION.equals("none"))) {
             sender.sendMessage(Settings.FlySpeedLimiter.BYPASS_TOGGLE_NO_PERMISSION
                     .replace("{prefix}", Settings.PREFIX));
             return;

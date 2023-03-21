@@ -248,6 +248,8 @@ public class Settings extends SimpleSettings {
         public static List<String> INTERVAL_MESSAGES;
         public static List<String> COMMANDS_ON_CLEAR;
         public static List<String> ALLOWED_ENTITIES;
+        public static String PLACEHOLDER_NO_TIME;
+        public static String PLACEHOLDER_TIME;
 
         private static void init() {
             Settings.setPathPrefix("clear-lag");
@@ -268,6 +270,9 @@ public class Settings extends SimpleSettings {
             INTERVAL_MESSAGES = Settings.getStringList("interval-messages");
             COMMANDS_ON_CLEAR = Settings.getStringList("commands-on-clear");
             ALLOWED_ENTITIES = Settings.getStringList("allowed-entities");
+            Settings.setPathPrefix("clear-lag.placeholder");
+            PLACEHOLDER_NO_TIME = ColorUtils.translateColorCodes(Settings.getString("no-time"));
+            PLACEHOLDER_TIME = ColorUtils.translateColorCodes(Settings.getString("time"));
         }
     }
 

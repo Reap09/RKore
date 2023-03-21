@@ -19,7 +19,7 @@ public class Store extends SimpleCommand {
 
     protected void onCommand() {
         if (sender instanceof Player) {
-            if (sender.hasPermission(Settings.InfoCommands.STORE_PERMISSION) || Settings.InfoCommands.STORE_PERMISSION.equals("null")) {
+            if (sender.hasPermission(Settings.InfoCommands.STORE_PERMISSION) || Settings.InfoCommands.STORE_PERMISSION.equals("none")) {
                 Player player = (Player) sender;
                 player.sendMessage((Settings.InfoCommands.STORE_MESSAGE)
                         .replace("{prefix}", Settings.PREFIX));

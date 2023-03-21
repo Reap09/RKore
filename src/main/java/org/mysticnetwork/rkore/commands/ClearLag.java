@@ -1,8 +1,5 @@
 package org.mysticnetwork.rkore.commands;
 
-import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.model.user.User;
-import net.luckperms.api.util.Tristate;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -15,7 +12,6 @@ import org.mineacademy.fo.command.SimpleCommandGroup;
 import org.mysticnetwork.rkore.settings.Settings;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.mysticnetwork.rkore.runnable.AutoClearLag.countdown;
 
@@ -40,7 +36,7 @@ public class ClearLag extends SimpleCommand {
     protected void onCommand() {
         if (args.length > 0 && args[0].equalsIgnoreCase("time")) {
             if (sender instanceof Player) {
-                if (sender.hasPermission(Settings.ClearLag.TIME_PERMISSION) || Settings.ClearLag.TIME_PERMISSION.equals("null")) {
+                if (sender.hasPermission(Settings.ClearLag.TIME_PERMISSION) || Settings.ClearLag.TIME_PERMISSION.equals("none")) {
                     if (countdown == -1) {
                         sender.sendMessage(Settings.ClearLag.NO_TIME
                                 .replace("{prefix}", Settings.PREFIX));
@@ -108,7 +104,7 @@ public class ClearLag extends SimpleCommand {
                 return;
             }
         }
-        if (sender.hasPermission(Settings.ClearLag.PERMISSION) || Settings.ClearLag.PERMISSION.equals("null")) {
+        if (sender.hasPermission(Settings.ClearLag.PERMISSION) || Settings.ClearLag.PERMISSION.equals("none")) {
             int removedEntities = 0;
             List<String> commandList = Settings.ClearLag.COMMANDS_ON_CLEAR;
             for (World world : Bukkit.getServer().getWorlds()) {

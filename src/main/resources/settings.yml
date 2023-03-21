@@ -27,8 +27,7 @@ clear-inventory:
     - 'clear'
     - 'clearinv'
   description: "Clears a players inventory"
-  # For no permission set value as 'null'
-  permission: "null"
+  permission: "none"
   bypass-permission: "rkore.clearinventory.admin"
   # Placeholders
   # {target} --> player trying to clear
@@ -127,8 +126,7 @@ info-commands:
     enabled: true
     aliases:
       - 'disc'
-    # For no permission set value as "null"
-    permission: "null"
+    permission: "none"
     message: "{prefix} &bhttps://discord.gg/mysticnetwork"
     description: "Command to show the server's discord"
     no-permission: "{prefix} &cYou do not have permission to use this command"
@@ -136,8 +134,7 @@ info-commands:
     enabled: true
     aliases:
       - 'web'
-    # For no permission set value as "null"
-    permission: "null"
+    permission: "none"
     message: "{prefix} &ahttps://www.mysticnetwork.org"
     description: "Command to show the server's website"
     no-permission: "{prefix} &cYou do not have permission to use this command"
@@ -145,8 +142,7 @@ info-commands:
     enabled: true
     aliases:
       - 'stores'
-    # For no permission set value as "null"
-    permission: "null"
+    permission: "none"
     message: "{prefix} &ahttps://www.mysticnetwork.org"
     description: "Command to show the server's store"
     no-permission: "{prefix} &cYou do not have permission to use this command"
@@ -184,8 +180,7 @@ clear-lag:
   description: "Clears entities in all words"
   no-permission-message: "{prefix} &cYou do not have permission to Clear lag"
   permission: "rkore.clearlag.clear"
-  # "null" equals no permission
-  time-permission: "null"
+  time-permission: "none"
   time-no-permission-message: "{prefix} &cYou do not have permission to view time on clear lag"
   # Placeholders
   # {time} --> time until next clear
@@ -223,6 +218,12 @@ clear-lag:
   # - SKELETON
   allowed-entities:
     - 'MOB_SPAWNER'
+  # placeholderapi required | placeholder = %rkore_clearlag_time%
+  placeholder:
+    no-time: "There is no clear lag interval running"
+    # Placeholders
+    # {time} --> displays the time until the next clear lag
+    time: "&7{time}"
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of FlySpeedLimiter
 # -------------------------------------------------------------------------------------------

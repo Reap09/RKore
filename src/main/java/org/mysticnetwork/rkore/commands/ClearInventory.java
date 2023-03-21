@@ -36,7 +36,7 @@ public class ClearInventory extends SimpleCommand {
                     .replace("{prefix}", Settings.PREFIX));
             return;
         }
-        if (!(sender.hasPermission(Settings.ClearInventory.PERMISSION) || Settings.ClearInventory.PERMISSION.equals("null"))) {
+        if (!(sender.hasPermission(Settings.ClearInventory.PERMISSION) || Settings.ClearInventory.PERMISSION.equals("none"))) {
             sender.sendMessage(Settings.ClearInventory.NO_PERMISSION
                     .replace("{prefix}", Settings.PREFIX));
             return;

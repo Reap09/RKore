@@ -19,7 +19,7 @@ public class Discord extends SimpleCommand {
 
     protected void onCommand() {
         if (sender instanceof Player) {
-            if (sender.hasPermission(Settings.InfoCommands.DISCORD_PERMISSION) || Settings.InfoCommands.DISCORD_PERMISSION.equals("null")) {
+            if (sender.hasPermission(Settings.InfoCommands.DISCORD_PERMISSION) || Settings.InfoCommands.DISCORD_PERMISSION.equals("none")) {
                 Player player = (Player) sender;
                 player.sendMessage((Settings.InfoCommands.DISCORD_MESSAGE)
                         .replace("{prefix}", Settings.PREFIX));

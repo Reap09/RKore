@@ -29,7 +29,7 @@ public class CmdSpy extends SimpleCommand implements Listener {
 
     protected void onCommand() {
         if (sender instanceof Player) {
-                if (!(sender.hasPermission(Settings.CommandSpy.InGame.PERMISSION) || Settings.CommandSpy.InGame.PERMISSION.equals("null"))) {
+                if (!(sender.hasPermission(Settings.CommandSpy.InGame.PERMISSION) || Settings.CommandSpy.InGame.PERMISSION.equals("none"))) {
                     sender.sendMessage(Settings.CommandSpy.InGame.NO_PERMISSION
                             .replace("{prefix}", Settings.PREFIX));
                     return;

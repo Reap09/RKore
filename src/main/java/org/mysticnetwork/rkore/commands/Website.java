@@ -19,7 +19,7 @@ public class Website extends SimpleCommand {
 
     protected void onCommand() {
         if (sender instanceof Player) {
-            if (sender.hasPermission(Settings.InfoCommands.WEBSITE_PERMISSION) || Settings.InfoCommands.WEBSITE_PERMISSION.equals("null")) {
+            if (sender.hasPermission(Settings.InfoCommands.WEBSITE_PERMISSION) || Settings.InfoCommands.WEBSITE_PERMISSION.equals("none")) {
                 Player player = (Player) sender;
                 player.sendMessage((Settings.InfoCommands.WEBSITE_MESSAGE)
                         .replace("{prefix}", Settings.PREFIX));

@@ -51,7 +51,14 @@ public class FlySpeedLimiter implements Listener {
                     playerLeft.getBlock().getType() == Material.WATER || playerLeft.getBlock().getType() == Material.STATIONARY_WATER ||
                     playerRight.getBlock().getType() == Material.WATER || playerRight.getBlock().getType() == Material.STATIONARY_WATER ||
                     playerForward.getBlock().getType() == Material.WATER || playerForward.getBlock().getType() == Material.STATIONARY_WATER ||
-                    playerBackward.getBlock().getType() == Material.WATER || playerBackward.getBlock().getType() == Material.STATIONARY_WATER)) {
+                    playerBackward.getBlock().getType() == Material.WATER || playerBackward.getBlock().getType() == Material.STATIONARY_WATER ||
+                    e.getTo().getBlock().getType() == Material.LAVA || e.getTo().getBlock().getType() == Material.STATIONARY_LAVA ||
+                    playerHead.getBlock().getType() == Material.LAVA || playerHead.getBlock().getType() == Material.STATIONARY_LAVA ||
+                    playerFeet.getBlock().getType() == Material.LAVA || playerFeet.getBlock().getType() == Material.STATIONARY_LAVA ||
+                    playerLeft.getBlock().getType() == Material.LAVA || playerLeft.getBlock().getType() == Material.STATIONARY_LAVA ||
+                    playerRight.getBlock().getType() == Material.LAVA || playerRight.getBlock().getType() == Material.STATIONARY_LAVA ||
+                    playerForward.getBlock().getType() == Material.LAVA || playerForward.getBlock().getType() == Material.STATIONARY_LAVA ||
+                    playerBackward.getBlock().getType() == Material.LAVA || playerBackward.getBlock().getType() == Material.STATIONARY_LAVA)) {
                 if (!bypassTogglePermission.asBoolean() || !bypassPermission.asBoolean()) {
                     if (!bedrockPlayer.asBoolean()) {
                         if (justEnabledFly) {
