@@ -15,7 +15,7 @@
     <br />
     <br />
     <a href="https://github.com/Reap09/RKore/issues">Report Bug</a>
-    .
+    |
     <a href="https://github.com/Reap09/RKore/issues">Request Feature</a>
   </p>
 </div>
