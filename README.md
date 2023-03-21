@@ -39,18 +39,8 @@
     </ul>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#built-with">Built With</a></li>
-    <li><a href="#how-to-use">How to Use</a></li>
   </ol>
 </details>
-
-<!-- BUILT WITH -->
-### Built With
-
-* [![Java][Java.com]][Java-url]
-* [![MariaDB][Mariadb.org]][Mariadb-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
@@ -61,7 +51,7 @@ This is how you download and successfully active the plugin!
 <!-- INSTALLATION -->
 ### Installation
 
-1. Download the latest jar from [Downloads](https://discord.gg/ADUPEArnb6)
+1. Download the latest jar from [Downloads](https://discord.gg/sPffCVJP7A)
 2. Insert into your servers plugins folder and restart/start your server
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -135,6 +125,14 @@ Discord: Reap#0001
 Email: contact@mysticnetwork.org
 
 Project Link: [https://github.com/Reap09/RKore](https://github.com/Reap09/RKore)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+  
+<!-- BUILT WITH -->
+### Built With
+
+* [![Java][Java.com]][Java-url]
+* [![MariaDB][Mariadb.org]][Mariadb-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
