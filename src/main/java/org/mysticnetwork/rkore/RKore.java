@@ -54,6 +54,7 @@ public final class RKore extends SimplePlugin {
     public void onPluginStart() {
         instance = this;
 
+
         log(1,"[&5RKore&r] Schematics Loaded: &5" + getSchematics().size());
 
         if (Package.getPackage("org.mysticnetwork.rkore.cache") == null) {
