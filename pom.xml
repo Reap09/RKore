@@ -6,7 +6,7 @@
     <groupId>org.mysticnetwork</groupId>
     <artifactId>RKore</artifactId>
     <name>RKore</name>
-    <version>1.5.2</version>
+    <version>1.5.3</version>
     <packaging>jar</packaging>
     <properties>
         <main.class>org.mysticnetwork.rkore.RKore</main.class>

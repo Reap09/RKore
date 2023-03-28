@@ -23,11 +23,9 @@ public class Settings extends SimpleSettings {
     }
 
     public static String PREFIX;
-    public static String LICENSE_KEY;
 
     private static void init() {
         PREFIX = ColorUtils.translateColorCodes(Settings.getString("prefix"));
-        LICENSE_KEY = Settings.getString("license-key");
     }
 
     public static class ExternalCommands {

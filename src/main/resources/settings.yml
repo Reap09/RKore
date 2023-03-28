@@ -2,8 +2,6 @@
 #                       Welcome to the main configuration of ${project.artifactId}
 #                           Created by Reap_9 for Mystic Network
 # !-------------------------------------------------------------------------------------------------!
-# Replace the 0 with your license key
-license-key: "0"
 # Do Not Edit This
 Version: 1
 # Internal prefix

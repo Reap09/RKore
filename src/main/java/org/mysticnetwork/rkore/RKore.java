@@ -12,7 +12,7 @@ import org.mineacademy.fo.plugin.SimplePlugin;
 import org.mysticnetwork.rkore.cache.DataStorage;
 import org.mysticnetwork.rkore.commands.*;
 import org.mysticnetwork.rkore.event.*;
-import org.mysticnetwork.rkore.licensedb.Licensing;
+import org.mysticnetwork.rkore.utils.ConsoleLogging;
 import org.mysticnetwork.rkore.model.Schematic;
 import org.mysticnetwork.rkore.model.SchematicItem;
 import org.mysticnetwork.rkore.model.SchematicPasting;
@@ -44,8 +44,8 @@ public final class RKore extends SimplePlugin {
     public Map<UUID, Timestamp> getConfirmations() {
         return confirmations;
     }
-    private Licensing.LogType logType = Licensing.LogType.NORMAL;
-    public RKore setConsoleLog(Licensing.LogType logType) {
+    private ConsoleLogging.LogType logType = ConsoleLogging.LogType.NORMAL;
+    public RKore setConsoleLog(ConsoleLogging.LogType logType) {
         this.logType = logType;
         return this;
     }
@@ -204,7 +204,7 @@ public final class RKore extends SimplePlugin {
         log(1,"[&5RKore&r] &cDisabled");
     }
     public void log(int type, String message) {
-        if (logType == Licensing.LogType.NONE || (logType == Licensing.LogType.LOW && type == 0))
+        if (logType == ConsoleLogging.LogType.NONE || (logType == ConsoleLogging.LogType.LOW && type == 0))
             return;
         console.sendMessage(ColorUtils.translateColorCodes(message));
     }
