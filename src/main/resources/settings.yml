@@ -7,7 +7,7 @@ Version: 1
 # Internal prefix
 Prefix: "&8[&5&lRKore&8]&7"
 Log_Lag_Over_Milis: 100
-# Debug Mode: Debug: true
+# Debug Mode: (Debug: true)
 Debug: [ ]
 # Command Aliases
 Command_Aliases: [ rkore, rk ]
@@ -31,6 +31,8 @@ infinite-blocks:
   success-given: "{prefix} &7You have ben given &d{item}"
   spent: "{prefix} &7You've just spent &d${spent} &7on infinite blocks."
   insufficient-funds: "{prefix} &7You do not have enough money to use that infinite block"
+# Blocks/Buckets can be made/configured in infinitebuckets.yml
+
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of the Clear Inventory
 # -------------------------------------------------------------------------------------------
@@ -65,6 +67,7 @@ clear-inventory:
   # {player} --> player who executed the clearinventory command
   console-cmds-on-clear:
     - "effect {player} clear"
+
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of Command Spy
 # -------------------------------------------------------------------------------------------
@@ -131,6 +134,7 @@ command-spy:
         - '``{server}``'
         - ''
         - '{time}'
+
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of Info Commands
 # -------------------------------------------------------------------------------------------
@@ -160,6 +164,7 @@ info-commands:
     message: "{prefix} &ahttps://www.mysticnetwork.org"
     description: "Command to show the server's store"
     no-permission: "{prefix} &cYou do not have permission to use this command"
+
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of External Commands
 #
@@ -184,6 +189,7 @@ external-commands:
   success-message: "{prefix} successfully executed: &d{cmd}"
   no-player: "{prefix} I could not find any player with the name, &d{player}"
   bedrock-prefix: "."
+
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of ClearLag
 # -------------------------------------------------------------------------------------------
@@ -238,6 +244,7 @@ clear-lag:
     # Placeholders
     # {time} --> displays the time until the next clear lag
     time: "&7{time}"
+
 # -------------------------------------------------------------------------------------------
 # Here you can set the main config of FlySpeedLimiter
 # -------------------------------------------------------------------------------------------
