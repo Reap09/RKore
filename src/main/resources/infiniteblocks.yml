@@ -7,7 +7,7 @@ infinite-blocks:
     display-name: "&aInfinite Obsidian"
     lore:
       - "&7Place this block endlessly!"
-      - "&eCosts $100 per use&o&b&s&i&d&i&a&n"
+      - "&eCosts 100 per use"
     glow: true
     price-per-use: 100
   sand:

@@ -39,6 +39,7 @@ public class Settings extends SimpleSettings {
         public static String SUCCESS_GIVE;
         public static String SUCCESS_GIVEN;
         public static String SPENT;
+        //public static double SPENT_MESSAGE_TIME;
         public static String INSUFFICIENT_FUNDS;
         private static void init() {
             Settings.setPathPrefix("infinite-blocks");
@@ -52,6 +53,7 @@ public class Settings extends SimpleSettings {
             SUCCESS_GIVE = ColorUtils.translateColorCodes(Settings.getString("success-give"));
             SUCCESS_GIVEN = ColorUtils.translateColorCodes(Settings.getString("success-given"));
             SPENT = ColorUtils.translateColorCodes(Settings.getString("spent"));
+            //SPENT_MESSAGE_TIME = Settings.getDouble("spent-message-time");
             INSUFFICIENT_FUNDS = ColorUtils.translateColorCodes(Settings.getString("insufficient-funds"));
 
         }

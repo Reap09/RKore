@@ -24,11 +24,16 @@ infinite-blocks:
     - 'if'
   description: "Gives a player an infinite block/bucket"
   permission: "rkore.infinite-buckets.admin"
+  # Placeholders
+  # {target} --> player item is being given too
+  # {item} --> item being given
+  # {spent} --> money spent on placing infinite blocks 10 seconds after last place
   no-permission: "{prefix} &cYou don't have a permission to use this command"
   invalid-player: "{prefix} &7Couldn't find player, &d{target}"
   invalid-item: "{prefix} &d{item} &7is an invalid"
   success-give: "{prefix} &7You have given &d{target} &7a &d{item} &7infinite block"
   success-given: "{prefix} &7You have ben given &d{item}"
+  # Spent message will be sent to the player placing blocks 10 seconds after they stopped placing blocks
   spent: "{prefix} &7You've just spent &d${spent} &7on infinite blocks."
   insufficient-funds: "{prefix} &7You do not have enough money to use that infinite block"
 # Blocks/Buckets can be made/configured in infinitebuckets.yml
