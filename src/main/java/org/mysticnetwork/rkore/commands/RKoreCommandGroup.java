@@ -13,10 +13,10 @@ import org.mineacademy.fo.command.SimpleCommandGroup;
 
 @AutoRegister
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class SchemBuilderCommandGroup extends SimpleCommandGroup {
+public final class RKoreCommandGroup extends SimpleCommandGroup {
 
     @Getter(value = AccessLevel.PRIVATE)
-    private static final SchemBuilderCommandGroup instance = new SchemBuilderCommandGroup();
+    private static final RKoreCommandGroup instance = new RKoreCommandGroup();
 
     @Override
     protected void registerSubcommands() {
@@ -30,6 +30,11 @@ public final class SchemBuilderCommandGroup extends SimpleCommandGroup {
             registerSubcommand(new ExternalCommand(this));
         } else {
             RKore.instance.log(1, "[&5RKore&r] &cExternal Commands Disabled");
+        }
+        if (Settings.ExternalCommands.ENABLED) {
+            registerSubcommand(new InfiniteBlock(this));
+        } else {
+            RKore.instance.log(1, "[&5RKore&r] &cInfinite Blocks Disabled");
         }
     }
 

@@ -1,0 +1,33 @@
+infinite-blocks:
+  obsidian:
+    type: OBSIDIAN
+    display-name: "&aInfinite Obsidian"
+    lore:
+      - "&7Place this block endlessly!"
+      - "&eCosts $100 per use&o&b&s&i&d&i&a&n"
+    glow: true
+    price-per-use: 100
+  sand:
+    type: SAND
+    display-name: "&aInfinite Sand"
+    lore:
+      - "&7Place this block endlessly!"
+      - "&eCosts $50 per use"
+    glow: true
+    price-per-use: 50
+  water:
+    type: WATER_BUCKET
+    display-name: "&aInfinite Water"
+    lore:
+      - "&7Place this block endlessly!"
+      - "&eCosts $50 per use"
+    glow: true
+    price-per-use: 50
+  lava:
+    type: LAVA_BUCKET
+    display-name: "&aInfinite Lava"
+    lore:
+      - "&7Place this bucket endlessly!"
+      - "&eCosts $50 per use"
+    glow: true
+    price-per-use: 50

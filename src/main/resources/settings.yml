@@ -16,6 +16,22 @@ Command_Aliases: [ rkore, rk ]
 # -------------------------------------------------------------------------------------------
 prefix: "&8[&5&lRKore&8]&7"
 # -------------------------------------------------------------------------------------------
+# Here you can set the main config of the Infinite Blocks
+# -------------------------------------------------------------------------------------------
+infinite-blocks:
+  enabled: true
+  aliases:
+    - 'if'
+  description: "Gives a player an infinite block/bucket"
+  permission: "rkore.infinite-buckets.admin"
+  no-permission: "{prefix} &cYou don't have a permission to use this command"
+  invalid-player: "{prefix} &7Couldn't find player, &d{target}"
+  invalid-item: "{prefix} &d{item} &7is an invalid"
+  success-give: "{prefix} &7You have given &d{target} &7a &d{item} &7infinite block"
+  success-given: "{prefix} &7You have ben given &d{item}"
+  spent: "{prefix} &7You've just spent &d${spent} &7on infinite blocks."
+  insufficient-funds: "{prefix} &7You do not have enough money to use that infinite block"
+# -------------------------------------------------------------------------------------------
 # Here you can set the main config of the Clear Inventory
 # -------------------------------------------------------------------------------------------
 clear-inventory:
@@ -151,7 +167,7 @@ info-commands:
 # this can also be used to fix issues with giving bosses with EliteBosses to bedrock players
 #
 # Usage
-# with this command u can send commands to be performed by console
+# with this command you can send commands to be performed by console
 #
 # Command Placeholders
 # br:<playername> --> returns a players name without the "." in front of the name, for example "br:.player_name" will return "player_name"

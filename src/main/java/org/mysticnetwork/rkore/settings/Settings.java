@@ -28,6 +28,34 @@ public class Settings extends SimpleSettings {
         PREFIX = ColorUtils.translateColorCodes(Settings.getString("prefix"));
     }
 
+    public static class InfiniteBlocks {
+        public static Boolean ENABLED;
+        public static List<String> ALIASES;
+        public static String DESCRIPTION;
+        public static String PERMISSION;
+        public static String NO_PERMISSION;
+        public static String NO_PLAYER;
+        public static String NO_ITEM;
+        public static String SUCCESS_GIVE;
+        public static String SUCCESS_GIVEN;
+        public static String SPENT;
+        public static String INSUFFICIENT_FUNDS;
+        private static void init() {
+            Settings.setPathPrefix("infinite-blocks");
+            ENABLED = Settings.getBoolean("enabled");
+            ALIASES = Settings.getStringList("aliases");
+            DESCRIPTION = ColorUtils.translateColorCodes(Settings.getString("description"));
+            PERMISSION = ColorUtils.translateColorCodes(Settings.getString("permission"));
+            NO_PERMISSION = ColorUtils.translateColorCodes(Settings.getString("no-permission"));
+            NO_PLAYER = ColorUtils.translateColorCodes(Settings.getString("invalid-player"));
+            NO_ITEM = ColorUtils.translateColorCodes(Settings.getString("invalid-item"));
+            SUCCESS_GIVE = ColorUtils.translateColorCodes(Settings.getString("success-give"));
+            SUCCESS_GIVEN = ColorUtils.translateColorCodes(Settings.getString("success-given"));
+            SPENT = ColorUtils.translateColorCodes(Settings.getString("spent"));
+            INSUFFICIENT_FUNDS = ColorUtils.translateColorCodes(Settings.getString("insufficient-funds"));
+
+        }
+    }
     public static class ExternalCommands {
         public static Boolean ENABLED;
         public static List<String> ALIASES;

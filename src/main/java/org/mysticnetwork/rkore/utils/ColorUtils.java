@@ -15,7 +15,6 @@ public class ColorUtils {
 
         for (int i = 0; i < texts.length; i++) {
             if (texts[i].equalsIgnoreCase("&")) {
-                //get the next string
                 i++;
                 if (texts[i].charAt(0) == '#') {
                     finalText.append(ChatColor.valueOf(texts[i].substring(0, 7)) + texts[i].substring(7));

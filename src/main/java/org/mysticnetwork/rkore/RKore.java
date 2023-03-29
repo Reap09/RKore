@@ -3,10 +3,10 @@ package org.mysticnetwork.rkore;
 import java.sql.Timestamp;
 import java.util.*;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
 import org.mysticnetwork.rkore.cache.DataStorage;
@@ -20,11 +20,19 @@ import org.mysticnetwork.rkore.model.hologram.Hologram;
 import org.mysticnetwork.rkore.runnable.AutoClearLag;
 import org.mysticnetwork.rkore.settings.Settings;
 import org.mysticnetwork.rkore.utils.ColorUtils;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import net.milkbowl.vault.economy.Economy;
+import java.io.File;
+import java.io.IOException;
 
 import static org.mysticnetwork.rkore.model.Schematic.getSchematics;
 
 public final class RKore extends SimplePlugin {
     public static RKore instance;
+    private FileConfiguration infiniteBlocksConfig;
+    private File infiniteBlocksConfigFile;
+    private Economy economy;
 
 
     public static RKore getInstance() {
@@ -53,6 +61,8 @@ public final class RKore extends SimplePlugin {
 
     public void onPluginStart() {
         instance = this;
+        createInfiniteBlocksConfig();
+        setupEconomy();
 
 
         log(1,"[&5RKore&r] Schematics Loaded: &5" + getSchematics().size());
@@ -114,6 +124,11 @@ public final class RKore extends SimplePlugin {
             log(1,"[&5RKore&r] &aSchem Builder Enabled");
         } else {
             log(1,"[&5RKore&r] &aSchem Builder Disabled");
+        }
+        if (Settings.InfiniteBlocks.ENABLED) {
+            registerEvents(new InfiniteBlockListener(this));
+        } else {
+            log(1, "[&5RKore&r] &cInfinite Blocks Disabled");
         }
 
         if (Settings.FlySpeedLimiter.ENABLED) {
@@ -187,7 +202,7 @@ public final class RKore extends SimplePlugin {
     public void onReloadablesStart() {
 
         instance = this;
-
+        createInfiniteBlocksConfig();
         Schematic.loadAll();
         DataStorage.getInstance().load();
         Common.runTimer(20, () -> {
@@ -208,7 +223,41 @@ public final class RKore extends SimplePlugin {
             return;
         console.sendMessage(ColorUtils.translateColorCodes(message));
     }
-    Boolean papiEnabled = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
+    public void createInfiniteBlocksConfig() {
+        infiniteBlocksConfigFile = new File(getDataFolder(), "infiniteblocks.yml");
+        if (!infiniteBlocksConfigFile.exists()) {
+            infiniteBlocksConfigFile.getParentFile().mkdirs();
+            saveResource("infiniteblocks.yml", false);
+        }
 
+        infiniteBlocksConfig = new YamlConfiguration();
+        try {
+            infiniteBlocksConfig.load(infiniteBlocksConfigFile);
+        } catch (IOException | org.bukkit.configuration.InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+    private void setupEconomy() {
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+        if (economyProvider != null) {
+            economy = economyProvider.getProvider();
+        }
+    }
+
+    public Economy getEconomy() {
+        return economy;
+    }
+
+    public FileConfiguration getInfiniteBlocksConfig() {
+        return infiniteBlocksConfig;
+    }
+
+    public void saveInfiniteBlocksConfig() {
+        try {
+            getInfiniteBlocksConfig().save(infiniteBlocksConfigFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
