@@ -62,6 +62,7 @@ This is how you download and successfully active the plugin!
 
 - [ ] Schematic Builder
 - [ ] Fly Boost Limiter
+- [ ] Infinite Blocks/Buckets
 - [ ] Clear Lag
 - [ ] Clear Inventory Confirm
 - [ ] Command Spy
@@ -77,7 +78,8 @@ See the [open issues](https://github.com/Reap09/RKore/issues) for a full list of
 
 - [ ] /rkore - plugin credits
 - [ ] /rkore help - shows argument commands
-- [ ] /rkore give <player> <schematic> [with_air] - gives schembuilder item to player with or without air within the schematic (true/false)
+- [ ] /rkore give <player\> <schematic\> [with_air] - gives schembuilder item to player with or without air within the schematic (true/false)
+- [ ] /rkore infiniteblock <player\> <infiniteblock\> - gives the specified player an infiniteblock that is made/specified in infiniteblocks.yml
 - [ ] /rkore external <cmd> - performs a command to console that can be used to fix bedrock issues (( view settings.yml for more information ))
 - [ ] /cmdspy - toggles on and off command spy
 - [ ] /clearlag - clears entities from world (( able to have commands performed to console on clearlag such as /mob-stacking killall ))
@@ -94,24 +96,26 @@ See the [open issues](https://github.com/Reap09/RKore/issues) for a full list of
 ## Permissions
 
 - [ ] Clear Inventory
-  - [ ] permission - none
-  - [ ] bypass permission - rkore.clearinventory.admin
+  - permission - none
+  - bypass permission - rkore.clearinventory.admin
+- [ ] Infinite Blocks
+  - permission - rkore.infinite-buckets.admin
 - [ ] Command Spy
-  - [ ] permission - rkore.cmdspy
-  - [ ] bypass permission - rkore.cmdspy.bypass
+  - permission - rkore.cmdspy
+  - bypass permission - rkore.cmdspy.bypass
 - [ ] Info Commands
-  - [ ] permission - none
+  - permission - none
 - [ ] External Commands
-  - [ ] permission - rkore.externalcommands
+  - permission - rkore.externalcommands
 - [ ] Clear Lag 
-  - [ ] permission - rkore.clearlag.clear
-  - [ ] time permission - none
+  - permission - rkore.clearlag.clear
+  - time permission - none
 - [ ] Fly Speed Limiter
-  - [ ] bypass permission - rkore.flyspeedlimiter.bypass
-  - [ ] bedrock bypass permission - rkore.flyspeedlimiter.bedrock
-  - [ ] toggle permission - rkore.flyspeedlimiter.toggle.bypass
+  - bypass permission - rkore.flyspeedlimiter.bypass
+  - bedrock bypass permission - rkore.flyspeedlimiter.bedrock
+  - toggle permission - rkore.flyspeedlimiter.toggle.bypass
 - [ ] Schematic Builder
-  - [ ] give permission - rkore.schembuilder.admin
+  - give permission - rkore.schembuilder.admin
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
