@@ -23,7 +23,7 @@ infinite-blocks:
   aliases:
     - 'if'
   description: "Gives a player an infinite block/bucket"
-  permission: "rkore.infinite-buckets.admin"
+  permission: "rkore.infinite-blocks.admin"
   # Placeholders
   # {target} --> player item is being given too
   # {item} --> item being given
@@ -32,7 +32,7 @@ infinite-blocks:
   invalid-player: "{prefix} &7Couldn't find player, &d{target}"
   invalid-item: "{prefix} &d{item} &7is an invalid"
   success-give: "{prefix} &7You have given &d{target} &7a &d{item} &7infinite block"
-  success-given: "{prefix} &7You have ben given &d{item}"
+  success-given: "{prefix} &7You have received a &d{item} &7infinite block"
   # Spent message will be sent to the player placing blocks 10 seconds after they stopped placing blocks
   spent: "{prefix} &7You've just spent &d${spent} &7on infinite blocks."
   insufficient-funds: "{prefix} &7You do not have enough money to use that infinite block"

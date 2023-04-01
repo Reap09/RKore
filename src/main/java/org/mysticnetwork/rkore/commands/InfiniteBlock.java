@@ -26,18 +26,19 @@ public class InfiniteBlock extends SimpleSubCommand {
             setPermissionMessage(Settings.InfiniteBlocks.NO_PERMISSION
                     .replace("{prefix}", Settings.PREFIX));
             setUsage("<player> <infiniteblock>");
+            setAliases(Settings.InfiniteBlocks.ALIASES);
             setMinArguments(2);
         }
 
 
     protected void onCommand() {
         if (sender.hasPermission(Settings.InfiniteBlocks.PERMISSION) || Settings.InfiniteBlocks.PERMISSION.equals("none")) {
-            Player player = (Player) sender;
+            //Player player = (Player) sender;
 
             String targetPlayerName = args[0];
             Player targetPlayer = Bukkit.getPlayer(targetPlayerName);
             if (targetPlayer == null) {
-                player.sendMessage(Settings.InfiniteBlocks.NO_PLAYER
+                sender.sendMessage(Settings.InfiniteBlocks.NO_PLAYER
                         .replace("{prefix}", Settings.PREFIX)
                         .replace("{target}", args[0]));
                 return;
@@ -47,7 +48,7 @@ public class InfiniteBlock extends SimpleSubCommand {
             ConfigurationSection infiniteBlockSection = RKore.instance.getInfiniteBlocksConfig().getConfigurationSection("infinite-blocks." + infiniteBlockName);
 
             if (infiniteBlockSection == null) {
-                player.sendMessage(Settings.InfiniteBlocks.NO_ITEM
+                sender.sendMessage(Settings.InfiniteBlocks.NO_ITEM
                         .replace("{prefix}", Settings.PREFIX)
                         .replace("{item}", args[1]));
                 return;
@@ -86,14 +87,14 @@ public class InfiniteBlock extends SimpleSubCommand {
             }
             item.setItemMeta(meta);
             targetPlayer.getInventory().addItem(item);
-            player.sendMessage(Settings.InfiniteBlocks.SUCCESS_GIVE
+            sender.sendMessage(Settings.InfiniteBlocks.SUCCESS_GIVE
                     .replace("{prefix}", Settings.PREFIX)
-                    .replace("{player}", player.getName())
+                    .replace("{player}", sender.getName())
                     .replace("{target}", targetPlayerName)
                     .replace("{item}", infiniteBlockName));
             targetPlayer.sendMessage(Settings.InfiniteBlocks.SUCCESS_GIVEN
                     .replace("{prefix}", Settings.PREFIX)
-                    .replace("{player}", player.getName())
+                    .replace("{player}", sender.getName())
                     .replace("{target}", targetPlayerName)
                     .replace("{item}", infiniteBlockName));
         } else {
