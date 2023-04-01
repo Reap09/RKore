@@ -2,6 +2,7 @@ package org.mysticnetwork.rkore.event;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,6 +32,7 @@ public class InfiniteBlockListener implements Listener {
         this.plugin = plugin;
         this.economy = plugin.getEconomy();
     }
+
     @EventHandler
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
         ItemStack item = event.getPlayer().getItemInHand();
@@ -57,7 +59,92 @@ public class InfiniteBlockListener implements Listener {
 
         ConfigurationSection blockSection = plugin.getInfiniteBlocksConfig().getConfigurationSection("infinite-blocks." + hiddenBlockName);
         if (blockSection != null) {
-            double pricePerUse = plugin.getInfiniteBlocksConfig().getDouble("infinite-blocks."+ hiddenBlockName + ".price-per-use");
+            double pricePerUse = plugin.getInfiniteBlocksConfig().getDouble("infinite-blocks." + hiddenBlockName + ".price-per-use");
+            if (economy.getBalance(event.getPlayer()) >= pricePerUse) {
+                economy.withdrawPlayer(event.getPlayer(), pricePerUse);
+                playerSpentAmount.put(playerUUID, playerSpentAmount.getOrDefault(playerUUID, 0.0) + pricePerUse);
+                BukkitTask existingTask = playerTasks.get(playerUUID);
+                if (existingTask != null) {
+                    existingTask.cancel();
+                }
+                if (playerTasks.containsKey(playerUUID)) {
+                    playerTasks.get(playerUUID).cancel();
+                    playerTasks.remove(playerUUID);
+                }
+
+                BukkitTask newTask = new BukkitRunnable() {
+                    int intervals = 1;
+
+                    @Override
+                    public void run() {
+                        double totalSpent = playerSpentAmount.get(playerUUID);
+                        event.getPlayer().sendMessage(Settings.InfiniteBlocks.SPENT
+                                .replace("{prefix}", Settings.PREFIX)
+                                .replace("{spent}", "" + totalSpent));
+
+                        intervals++;
+
+                        if (intervals > 1) {
+                            playerSpentAmount.remove(playerUUID);
+                            playerTasks.remove(playerUUID);
+                            this.cancel();
+                        }
+                    }
+                }.runTaskTimer(plugin, 200L, 200L);
+
+                playerTasks.put(playerUUID, newTask);
+
+                event.setCancelled(true);
+
+                ItemStack newBucket = new ItemStack(item.getType());
+                newBucket.setAmount(item.getAmount());
+                newBucket.setItemMeta(meta);
+
+                Block targetBlock = event.getBlockClicked().getRelative(event.getBlockFace());
+                if (item.getType() == Material.LAVA_BUCKET) {
+                    targetBlock.setType(Material.LAVA);
+                } else if (item.getType() == Material.WATER_BUCKET) {
+                    targetBlock.setType(Material.WATER);
+                }
+
+                event.getPlayer().setItemInHand(newBucket);
+                event.getPlayer().updateInventory();
+            } else {
+                event.getPlayer().sendMessage(Settings.InfiniteBlocks.INSUFFICIENT_FUNDS
+                        .replace("{prefix}", Settings.PREFIX));
+                event.setCancelled(true);
+            }
+        }
+
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+        ItemStack item = event.getItemInHand();
+        ItemMeta meta = item.getItemMeta();
+        UUID playerUUID = event.getPlayer().getUniqueId();
+
+        if (meta == null || meta.getDisplayName() == null || meta.getLore() == null) {
+            return;
+        }
+
+        List<String> lore = meta.getLore();
+        String lastLine = lore.get(lore.size() - 1);
+        String hiddenBlockName = "";
+
+        Pattern pattern = Pattern.compile("§.(?=§|$)");
+        Matcher matcher = pattern.matcher(lastLine);
+        while (matcher.find()) {
+            hiddenBlockName += matcher.group().substring(1);
+        }
+
+        if (hiddenBlockName.isEmpty()) {
+            return;
+        }
+
+        ConfigurationSection blockSection = plugin.getInfiniteBlocksConfig().getConfigurationSection("infinite-blocks." + hiddenBlockName);
+        if (blockSection != null) {
+            double pricePerUse = plugin.getInfiniteBlocksConfig().getDouble("infinite-blocks." + hiddenBlockName + ".price-per-use");
             if (economy.getBalance(event.getPlayer()) >= pricePerUse) {
                 economy.withdrawPlayer(event.getPlayer(), pricePerUse);
                 playerSpentAmount.put(playerUUID, playerSpentAmount.getOrDefault(playerUUID, 0.0) + pricePerUse);
@@ -85,24 +172,10 @@ public class InfiniteBlockListener implements Listener {
                         }
                     }
                 }.runTaskTimer(plugin, 200L, 200L);
-               ItemStack newBucket = null;
-                if (item.getType() == Material.LAVA_BUCKET) {
-                    newBucket = new ItemStack(Material.LAVA_BUCKET);
-                    newBucket.setItemMeta(meta);
-                }
-                if (item.getType() == Material.WATER_BUCKET) {
-                    newBucket = new ItemStack(Material.WATER_BUCKET);
-                    newBucket.setItemMeta(meta);
-                }
-                ItemStack finalNewBucket = newBucket;
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        event.getPlayer().setItemInHand(finalNewBucket);
-                        event.getPlayer().updateInventory();
-                    }
-                }.runTaskLater(plugin, 1L);
+
                 playerTasks.put(playerUUID, newTask);
+                ItemStack newItem = item.clone();
+                event.getPlayer().getInventory().setItemInHand(newItem);
             } else {
                 event.getPlayer().sendMessage(Settings.InfiniteBlocks.INSUFFICIENT_FUNDS
                         .replace("{prefix}", Settings.PREFIX));
@@ -111,70 +184,4 @@ public class InfiniteBlockListener implements Listener {
         }
 
     }
-    @EventHandler
-    public void onBlockPlace(BlockPlaceEvent event) {
-        ItemStack item = event.getItemInHand();
-        ItemMeta meta = item.getItemMeta();
-        UUID playerUUID = event.getPlayer().getUniqueId();
-
-        if (meta == null || meta.getDisplayName() == null || meta.getLore() == null) {
-            return;
-        }
-
-        List<String> lore = meta.getLore();
-        String lastLine = lore.get(lore.size() - 1);
-        String hiddenBlockName = "";
-
-        Pattern pattern = Pattern.compile("§.(?=§|$)");
-        Matcher matcher = pattern.matcher(lastLine);
-        while (matcher.find()) {
-            hiddenBlockName += matcher.group().substring(1);
-        }
-
-        if (hiddenBlockName.isEmpty()) {
-            return;
-        }
-
-            ConfigurationSection blockSection = plugin.getInfiniteBlocksConfig().getConfigurationSection("infinite-blocks." + hiddenBlockName);
-            if (blockSection != null) {
-                double pricePerUse = plugin.getInfiniteBlocksConfig().getDouble("infinite-blocks."+ hiddenBlockName + ".price-per-use");
-                if (economy.getBalance(event.getPlayer()) >= pricePerUse) {
-                    economy.withdrawPlayer(event.getPlayer(), pricePerUse);
-                    playerSpentAmount.put(playerUUID, playerSpentAmount.getOrDefault(playerUUID, 0.0) + pricePerUse);
-                    BukkitTask existingTask = playerTasks.get(playerUUID);
-                    if (existingTask != null) {
-                        existingTask.cancel();
-                    }
-
-                    BukkitTask newTask = new BukkitRunnable() {
-                        int intervals = 1;
-
-                        @Override
-                        public void run() {
-                            double totalSpent = playerSpentAmount.get(playerUUID);
-                            event.getPlayer().sendMessage(Settings.InfiniteBlocks.SPENT
-                                    .replace("{prefix}", Settings.PREFIX)
-                                    .replace("{spent}", "" + totalSpent));
-
-                            intervals++;
-
-                            if (intervals > 1) {
-                                playerSpentAmount.remove(playerUUID);
-                                playerTasks.remove(playerUUID);
-                                this.cancel();
-                            }
-                        }
-                    }.runTaskTimer(plugin, 200L, 200L);
-
-                    playerTasks.put(playerUUID, newTask);
-                    ItemStack newItem = item.clone();
-                    event.getPlayer().getInventory().setItemInHand(newItem);
-                } else {
-                    event.getPlayer().sendMessage(Settings.InfiniteBlocks.INSUFFICIENT_FUNDS
-                            .replace("{prefix}", Settings.PREFIX));
-                    event.setCancelled(true);
-                }
-            }
-
-        }
-    }
+}
