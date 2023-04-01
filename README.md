@@ -99,7 +99,7 @@ See the [open issues](https://github.com/Reap09/RKore/issues) for a full list of
   - permission - none
   - bypass permission - rkore.clearinventory.admin
 - [ ] Infinite Blocks
-  - permission - rkore.infinite-buckets.admin
+  - permission - rkore.infinite-blocks.admin
 - [ ] Command Spy
   - permission - rkore.cmdspy
   - bypass permission - rkore.cmdspy.bypass
