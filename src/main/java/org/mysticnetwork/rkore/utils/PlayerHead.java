@@ -15,7 +15,7 @@ public class PlayerHead {
             URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + playerName);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("User-Agent", "KushStaffLogger");
+            connection.setRequestProperty("User-Agent", "RKore");
             connection.setDoOutput(true);
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(new InputStreamReader(connection.getInputStream()));

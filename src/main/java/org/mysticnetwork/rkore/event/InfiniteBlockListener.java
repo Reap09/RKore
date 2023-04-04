@@ -46,11 +46,13 @@ public class InfiniteBlockListener implements Listener {
         List<String> lore = meta.getLore();
         String lastLine = lore.get(lore.size() - 1);
         String hiddenBlockName = "";
-
-        Pattern pattern = Pattern.compile("§.(?=§|$)");
+        Pattern pattern = Pattern.compile("(?<=§H§i§d§d§e§n)(?:§.)+");
         Matcher matcher = pattern.matcher(lastLine);
         while (matcher.find()) {
-            hiddenBlockName += matcher.group().substring(1);
+            String group = matcher.group();
+            for (int i = 1; i < group.length(); i += 2) {
+                hiddenBlockName += group.charAt(i);
+            }
         }
 
         if (hiddenBlockName.isEmpty()) {
@@ -131,11 +133,13 @@ public class InfiniteBlockListener implements Listener {
         List<String> lore = meta.getLore();
         String lastLine = lore.get(lore.size() - 1);
         String hiddenBlockName = "";
-
-        Pattern pattern = Pattern.compile("§.(?=§|$)");
+        Pattern pattern = Pattern.compile("(?<=§H§i§d§d§e§n)(?:§.)+");
         Matcher matcher = pattern.matcher(lastLine);
         while (matcher.find()) {
-            hiddenBlockName += matcher.group().substring(1);
+            String group = matcher.group();
+            for (int i = 1; i < group.length(); i += 2) {
+                hiddenBlockName += group.charAt(i);
+            }
         }
 
         if (hiddenBlockName.isEmpty()) {

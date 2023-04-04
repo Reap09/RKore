@@ -31,7 +31,7 @@ public final class RKoreCommandGroup extends SimpleCommandGroup {
         } else {
             RKore.instance.log(1, "[&5RKore&r] &cExternal Commands Disabled");
         }
-        if (Settings.ExternalCommands.ENABLED) {
+        if (Settings.InfiniteBlocks.ENABLED) {
             registerSubcommand(new InfiniteBlock(this));
         } else {
             RKore.instance.log(1, "[&5RKore&r] &cInfinite Blocks Disabled");

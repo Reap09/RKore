@@ -33,7 +33,6 @@ public class InfiniteBlock extends SimpleSubCommand {
 
     protected void onCommand() {
         if (sender.hasPermission(Settings.InfiniteBlocks.PERMISSION) || Settings.InfiniteBlocks.PERMISSION.equals("none")) {
-            //Player player = (Player) sender;
 
             String targetPlayerName = args[0];
             Player targetPlayer = Bukkit.getPlayer(targetPlayerName);
@@ -73,7 +72,7 @@ public class InfiniteBlock extends SimpleSubCommand {
                 for (String line : lore) {
                     coloredLore.add(ColorUtils.translateColorCodes(line));
                 }
-                StringBuilder hiddenBlockName = new StringBuilder();
+                StringBuilder hiddenBlockName = new StringBuilder("§H§i§d§d§e§n");
                 for (char c : args[1].toCharArray()) {
                     hiddenBlockName.append(ChatColor.COLOR_CHAR).append(c);
                 }
